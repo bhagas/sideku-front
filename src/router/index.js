@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
+import RiwayatPenyakit from "../views/loggedin/RiwayatPenyakit.vue";
 import dashboard from "../views/loggedin/dashboard.vue";
 Vue.use(VueRouter);
 
@@ -26,7 +27,17 @@ const routes = [
     meta: {
         requiresAuth: true
     }
-},
+  },
+
+  {
+    path: '/riwayatpenyakit',
+    name: 'riwayatpenyakit',
+    component: RiwayatPenyakit,
+    meta: {
+        requiresAuth: true
+    }
+  },
+
 // {
 //     path: '/admin',
 //     name: 'admin',

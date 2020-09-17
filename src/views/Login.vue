@@ -1,21 +1,43 @@
 <template>
-  <div id="homee" class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
+  <div id="login">
+    <b-container class="bv-example-row">
+      <b-row>
+        <b-col md="4" offset-md="4">
+          <div style="display:flex;height:100vh;background-color:;align-items:center">
+            <div style="width:100%;height:;background-color:;padding:30px;background-color:rgba(0,0,0,0.7);border-radius:6px;color:#fff">
+              <h2 class="text-center">LOGIN SIDEKU</h2>
+              <hr/>
+              <b-form>
+                <b-form-group 
+                label="Username" 
+                >
+                  <b-form-input
+                    v-model="email"
+                    required
+                    placeholder="Enter Username"
+                  ></b-form-input>
+                </b-form-group>
+                
+                <b-form-group 
+                label="Password" 
+                >
+                  <b-form-input
+                    type="password"
+                    v-model="password"
+                    required
+                    placeholder="Enter Password"
+                  ></b-form-input>
+                </b-form-group>
 
-   
-
-    <p>{{cekLogin}}</p>
-  <p>{{tujuan}}</p>
-       <div>
-           <input v-model="email" placeholder="email">
-           <input v-model="password" placeholder="password" type='password'>
-      <div class="actions">
-        <div class="actions-inner">
-          <button @click="logindong">Login</button>
-             <button @click="logoutdong">Logout</button>
-        </div>
-      </div>
-    </div>
+                <div v-if="proses">Loading...</div>
+                <b-button @click="logindong" variant="primary">Login</b-button>
+              </b-form>
+              
+            </div>
+          </div>
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
@@ -24,49 +46,62 @@
 import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
-  name: "Home",
- data (){
-   return{
-     isLogin: false,
-     email: '',
-     password: ''
-   };
- },
-   props:{
-        tujuan: String
-     },
-watch:{
+  name: "login",
+  data (){
+    return{
+      isLogin: false,
+      email: '',
+      password: '',
+      proses: false
+    };
+  },
 
-},
+  props:{
+    tujuan: String
+  },
 
-created: {
+  watch:{
+    //memperhatikan state token dari vuex store
+   token(newValue, oldValue) {
+     if(newValue!= oldValue && newValue!=''){
+        this.proses= true;
+        //lempar ke halaman dashboard
+        (this.$route.query.tujuan)?
+        this.$router.push({ path: this.$route.query.tujuan}): 
+        this.$router.push({ name:"dashboard"})
+        
+     }
+   }
+  },
+
+  created: {
+      
+  
+  },
+
+  mounted:function(){
+      console.log(this.$route.query.tujuan)
+  },
+
+  computed: {
+  ...mapState('Login', ['token']),
+  ...mapGetters('Login',['cekLogin']),
+
+  },
+
+  methods:{
+    ...mapActions('Login', [ 'doLogin', 'doLogout' ]),
+    logindong: function(){
+      this.proses= true;
+      this.doLogin({email: this.email, password:this.password})
+      //didalam do login state token di isi
     
- 
-},
-mounted:function(){
-    console.log(this.$route.query.tujuan)
-},
-computed: {
-...mapState('Login', ['token']),
- ...mapGetters('Login',['cekLogin']),
-
-},
-
-methods:{
-  ...mapActions('Login', [ 'doLogin', 'doLogout' ]),
-   logindong: function(){
-    this.doLogin({email: this.email, password:this.password})
-    if(this.token){
-          this.$router.push({ name: "dashboard"})
-    }
-   
-  },
-   logoutdong: function(){
-    this.doLogout()
-    // this.isLogin =  this.cekLogin
-  },
-}
-
+    },
+    logoutdong: function(){
+      this.doLogout()
+      // this.isLogin =  this.cekLogin
+    },
+  }
 };
 </script>
 

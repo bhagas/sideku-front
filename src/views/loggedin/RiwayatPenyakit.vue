@@ -96,18 +96,10 @@
                                 <b-button size="sm" @click="info(row.item, row.index, $event.target)" class="mr-1">
                                 Info modal
                                 </b-button>
-                                <b-button size="sm" @click="row.toggleDetails">
-                                {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
-                                </b-button>
+                             
                             </template>
 
-                            <template v-slot:row-details="row">
-                                <b-card>
-                                <ul>
-                                    <li v-for="(value, key) in row.item" :key="key">{{ key }}: {{ value }}</li>
-                                </ul>
-                                </b-card>
-                            </template>
+                         
                         </b-table>
 
                         <b-row>
@@ -158,30 +150,23 @@
                 label="Riwayat Penyakit" 
                 >
                   <b-form-input
+                  v-model="namaPenyakit"
                     required
                     placeholder=""
                   ></b-form-input>
+                    <b-button @click="tambah" variant="primary">Simpan</b-button>
                 </b-form-group>
+                
             </b-form>
         </b-modal>
 
-        <b-modal id="modal-2" title="Tambah Data Master Riwayat Penyakit">
-            <b-form class="bv-example-row">
-                <b-form-group 
-                label="Riwayat Penyakit" 
-                >
-                  <b-form-input
-                    required
-                    placeholder=""
-                  ></b-form-input>
-                </b-form-group>
-            </b-form>
-        </b-modal>
+       
     </div>
     
 </template>
 <script>
 import myheader from "../../components/header"
+import axios from 'axios';
 export default {
     name:"RiwayatPenyakit",
     components:{
@@ -189,7 +174,8 @@ export default {
     },
     data() {
       return {
-        
+        namaPenyakit: '',
+        idChoose: '',
         items: [
           { isActive: true, age: 40, name: { first: 'Dickerson', last: 'Macdonald' } },
           { isActive: false, age: 21, name: { first: 'Larsen', last: 'Shaw' } },
@@ -258,6 +244,9 @@ export default {
     mounted() {
       // Set the initial number of items
       this.totalRows = this.items.length
+        axios.get('http://sideku.org:8801/penyakit/').then(data=>{
+                console.log(data)
+              })
     },
     methods: {
       info(item, index, button) {
@@ -273,6 +262,21 @@ export default {
         // Trigger pagination to update the number of buttons/pages due to filtering
         this.totalRows = filteredItems.length
         this.currentPage = 1
+      },
+
+      tambah(){
+           axios.post('http://sideku.org:8801/penyakit/register', {
+                 namaPenyakit: this.namaPenyakit
+               
+              })
+              .then(function (response) {
+                console.log(response);
+               
+              })
+              .catch(function (error) {
+                console.log(error);
+               
+              });
       }
     }
 }

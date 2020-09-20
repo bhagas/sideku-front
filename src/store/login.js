@@ -16,7 +16,7 @@ export default  {
     
         doLogin ({  commit }, dataLogin){
            
-            axios.post('https://backend.survplus.id/user/login', {
+            axios.post('http://sideku.org:8801/user/login', {
                  email: dataLogin.email,
                  password: dataLogin.password
                

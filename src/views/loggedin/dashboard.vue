@@ -62,6 +62,7 @@
          </b-col>
        </b-row>
      </b-container>
+     <button v-on:click="logoutdong()">logout</button>
   </div>
 </template>
 

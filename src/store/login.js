@@ -17,7 +17,7 @@ export default  {
         doLogin ({  commit }, dataLogin){
            
             axios.post('http://sideku.org:8801/user/login', {
-                 email: dataLogin.email,
+                 username: dataLogin.email,
                  password: dataLogin.password
                
               })

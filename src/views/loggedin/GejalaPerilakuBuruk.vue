@@ -1,12 +1,12 @@
 
 <template>
 
-    <div id="RiwayatPenyakit">
+    <div id="GejalaPerilakuBuruk">
         <myheader></myheader>
         <b-container>
             <b-row class="m-t-30">
                 <b-col md="12">
-                    <h3 class="text-center m-t-0 m-b-0"><strong>Master Riwayat Penyakit</strong></h3>
+                    <h3 class="text-center m-t-0 m-b-0"><strong>Master Gejala Perilaku Buruk</strong></h3>
                 </b-col>
             </b-row>
             <b-row class="m-t-30">
@@ -65,7 +65,7 @@
                                         description="Hilangkan semua centang, jika ingin semua kolom"
                                         style="font-weight:bold;">
                                         <b-form-checkbox-group v-model="filterOn">
-                                            <b-form-checkbox value="namaPenyakit">Nama Penyakit</b-form-checkbox>
+                                            <b-form-checkbox value="namaFisik">Nama Gejala</b-form-checkbox>
                                          
                                         </b-form-checkbox-group>
                                     </b-form-group>
@@ -139,16 +139,15 @@
                         </b-row>
                         <!-- Info modal -->
                         <b-modal :id="infoModal.id" :title="infoModal.title" ok-only @hide="resetInfoModal">
-                            <!-- <pre>{{ infoModal.content.namaPenyakit }}</pre> -->
+                    
                              <b-form class="bv-example-row">
                                 <b-form-group 
-                                label="Riwayat Penyakit" 
+                                label="Gejala Perilaku Buruk" 
                                 >
-                                <!-- {{infoModal.content.namaPenyakit}}
-                                 -->
+                             
                                    
                                   <b-form-input
-                                  v-model="namaPenyakitEdit"
+                                  v-model="namaGejalaPerilakuEdit"
                                     required
                                     placeholder=""
                      
@@ -164,13 +163,13 @@
             </b-row>
         </b-container>
 
-        <b-modal id="modal-1" title="Tambah Data Master Riwayat Penyakit">
+        <b-modal id="modal-1" title="Tambah Data Master Gejala Fisik">
             <b-form class="bv-example-row">
                 <b-form-group 
-                label="Riwayat Penyakit" 
+                label="Gejala Perilaku Buruk" 
                 >
                   <b-form-input
-                  v-model="namaPenyakit"
+                  v-model="namaGejalaPerilaku"
                     required
                     placeholder=""
                    
@@ -190,20 +189,20 @@
 import myheader from "../../components/header"
 import axios from 'axios';
 export default {
-    name:"RiwayatPenyakit",
+    name:"GejalaPerilakuBuruk",
     components:{
         myheader
     },
     data() {
       return {
-        namaPenyakit: '',
+        namaGejalaPerilaku: '',
         idChoose: '',
-        namaPenyakitEdit:'',
+        namaGejalaPerilakuEdit:'',
         items: [
          
         ],
         fields: [
-          { key: 'namaPenyakit', label: 'Nama Penyakit', sortable: true, sortDirection: 'desc' },
+          { key: 'namaGejalaPerilaku', label: 'Gejala Perilaku Buruk', sortable: true, sortDirection: 'desc' },
           // { key: 'age', label: 'Person age', sortable: true, class: 'text-center' },
           // {
           //   key: 'isActive',
@@ -246,7 +245,7 @@ export default {
     mounted() {
       // Set the initial number of items
     
-        axios.get('http://sideku.org:8801/penyakit/all',{
+        axios.get('http://sideku.org:8801/gejalaperilakuburuk/all',{
            headers: {
                   'accesstoken': localStorage.getItem('token')
               }
@@ -260,10 +259,11 @@ export default {
       info(item, index, button) {
         this.infoModal.title = `Row index: ${index}`
         this.infoModal.content = item
+        // console.log(item)
         // console.log( item.namaPenyakit)
         //keluarkan model sesuai id
         this.idChoose = item.id
-        this.namaPenyakitEdit = item.namaPenyakit
+        this.namaGejalaPerilakuEdit = item.namaGejalaPerilaku
         this.$root.$emit('bv::show::modal', this.infoModal.id, button)
       },
       resetInfoModal() {
@@ -278,8 +278,8 @@ export default {
 
       tambah(){
              let vm = this;
-           axios.post('http://sideku.org:8801/penyakit/register', {
-                 namaPenyakit: this.namaPenyakit
+           axios.post('http://sideku.org:8801/gejalaperilakuburuk/register', {
+                 namaGejalaPerilaku: this.namaGejalaPerilaku
                
               },{
                   headers: {
@@ -300,8 +300,8 @@ export default {
 
         edit(){
             let vm = this;
-           axios.patch('http://sideku.org:8801/penyakit/'+this.idChoose, {
-                 namaPenyakit: this.namaPenyakitEdit
+           axios.patch('http://sideku.org:8801/gejalaperilakuburuk/'+this.idChoose, {
+                 namaGejalaPerilaku: this.namaGejalaPerilakuEdit
                
               },{
               headers: {
@@ -314,7 +314,7 @@ export default {
                 alert('berhasil')
                 let idx = vm.items.findIndex(o => o.id === vm.idChoose );
                 // console.log(idx)
-                vm.items[idx].namaPenyakit = vm.namaPenyakitEdit
+                vm.items[idx].namaGejalaPerilaku = vm.namaGejalaPerilakuEdit
                 vm.$root.$emit('bv::hide::modal')
                
               })
@@ -325,7 +325,7 @@ export default {
       },
            hapus(id){
                 let vm = this;
-           axios.delete('http://sideku.org:8801/penyakit/delete/'+id,{
+           axios.delete('http://sideku.org:8801/gejalaperilakuburuk/delete/'+id,{
               headers: {
                       'accesstoken': localStorage.getItem('token')
                   }

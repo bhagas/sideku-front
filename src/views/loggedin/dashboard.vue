@@ -20,37 +20,47 @@
            </div>
            </router-link>
          </b-col>
+
          <b-col md="3" class="m-t-15">
+             <router-link :to="'gejalafisik'">
            <div style="width:100%;height:;background-color:;padding:30px;background-color:rgba(0,0,0,0.7);border-radius:6px;color:#fff">
              <center>
              <img src="https://via.placeholder.com/160">
              <h3 class="m-t-15 m-b-0">Master Gejala Fisik</h3>
              </center>
            </div>
+               </router-link>
          </b-col>
+
          <b-col md="3" class="m-t-15">
+                <router-link :to="'gejalapsikis'">
            <div style="width:100%;height:;background-color:;padding:30px;background-color:rgba(0,0,0,0.7);border-radius:6px;color:#fff">
              <center>
              <img src="https://via.placeholder.com/160">
              <h3 class="m-t-15 m-b-0">Master Gelaja Psikis</h3>
              </center>
            </div>
+                </router-link>
          </b-col>
          <b-col md="3" class="m-t-15">
+           <router-link :to="'gejalaPerilakuBuruk'">
            <div style="width:100%;height:;background-color:;padding:30px;background-color:rgba(0,0,0,0.7);border-radius:6px;color:#fff">
              <center>
              <img src="https://via.placeholder.com/160">
              <h3 class="m-t-15 m-b-0">Master Gejala Perilaku Buruk</h3>
              </center>
            </div>
+            </router-link>
          </b-col>
          <b-col md="3" class="m-t-15">
+              <router-link :to="'masterpernyataan'">
            <div style="width:100%;height:;background-color:;padding:30px;background-color:rgba(0,0,0,0.7);border-radius:6px;color:#fff">
              <center>
              <img src="https://via.placeholder.com/160">
              <h3 class="m-t-15 m-b-0">Master Pernyataan</h3>
              </center>
            </div>
+             </router-link>
          </b-col>
           <b-col md="3" class="m-t-15">
            <div style="width:100%;height:;background-color:;padding:30px;background-color:rgba(0,0,0,0.7);border-radius:6px;color:#fff">

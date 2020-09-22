@@ -3,6 +3,10 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import RiwayatPenyakit from "../views/loggedin/RiwayatPenyakit.vue";
+import GejalaFisik from "../views/loggedin/GejalaFisik.vue";
+import GejalaPsikis from "../views/loggedin/GejalaPsikis.vue";
+import GejalaPerilakuBuruk from "../views/loggedin/GejalaPerilakuBuruk.vue";
+import MasterPernyataan from "../views/loggedin/MasterPernyataan";
 import dashboard from "../views/loggedin/dashboard.vue";
 Vue.use(VueRouter);
 
@@ -37,7 +41,38 @@ const routes = [
         requiresAuth: true
     }
   },
-
+  {
+    path: '/gejalafisik',
+    name: 'gejalafisik',
+    component: GejalaFisik,
+    meta: {
+        requiresAuth: true
+    }
+  },
+  {
+    path: '/gejalapsikis',
+    name: 'gejalapsikis',
+    component: GejalaPsikis,
+    meta: {
+        requiresAuth: true
+    }
+  },
+  {
+    path: '/gejalaPerilakuBuruk',
+    name: 'gejalaPerilakuBuruk',
+    component: GejalaPerilakuBuruk,
+    meta: {
+        requiresAuth: true
+    }
+  },
+  {
+    path: '/masterpernyataan',
+    name: 'masterpernyataan',
+    component: MasterPernyataan,
+    meta: {
+        requiresAuth: true
+    }
+  },
 // {
 //     path: '/admin',
 //     name: 'admin',
@@ -66,7 +101,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if(to.matched.some(record => record.meta.requiresAuth)) {
-      if (localStorage.getItem('token') == '') {
+      if (!localStorage.getItem('token') || localStorage.getItem('token')  == "undefined" || localStorage.getItem('token') == '' ) {
           next({
               path: '/login',
               query: { tujuan: to.fullPath }
@@ -87,7 +122,7 @@ router.beforeEach((to, from, next) => {
       }
   } else if(to.matched.some(record => record.meta.guest)) {
     // console.log(localStorage.getItem('token'))
-      if(localStorage.getItem('token') == ''){
+      if(!localStorage.getItem('token') || localStorage.getItem('token')  == "undefined" || localStorage.getItem('token') == '' ){
           next()
       }
       else{

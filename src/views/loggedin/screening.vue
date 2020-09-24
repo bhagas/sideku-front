@@ -1,16 +1,14 @@
-
 <template>
-
-    <div id="RiwayatPenyakit">
+    <div id="screening">
         <myheader></myheader>
         <b-container>
             <b-row>
                 <b-col md="12" style="margin-top:60px;margin-bottom:60px">
                     <div class="box">
                         <b-row>
-                          <b-col md="12">
-                            <h3 class="text-center m-t-0 m-b-0"><strong>DATA MASTER RIWAYAT PENYAKIT</strong></h3>
-                          </b-col>
+                            <b-col md="12">
+                                <h3 class="text-center m-t-0 m-b-0"><strong>DATA PASIEN</strong></h3>
+                            </b-col>
                         </b-row>
 
                         <b-row class="m-t-15">
@@ -22,18 +20,19 @@
                                             Dashboard
                                         </router-link>
                                     </b-breadcrumb-item>
-                                    <b-breadcrumb-item active>Data Master Riwayat Penyakit</b-breadcrumb-item>
+                                    
+                                    <b-breadcrumb-item active>Data Pasien</b-breadcrumb-item>
                                 </b-breadcrumb>
                             </b-col>
                         </b-row>
 
-                        <b-row class="m-t-30">
+                        <b-row>
                            <b-col md="12">
                                 <b-button v-b-modal.modal-1 variant="primary">Tambah Data</b-button>
                            </b-col>
                         </b-row>
 
-                        <b-row class="m-t-15">
+                        <b-row class="m-t-30">
                             <b-col lg="12">
                                 <b-alert show variant="primary" class="m-b-0">
                                     <b-form-group
@@ -80,7 +79,9 @@
                                         description="Hilangkan semua centang, jika ingin semua kolom"
                                         style="font-weight:bold;">
                                         <b-form-checkbox-group v-model="filterOn">
-                                            <b-form-checkbox value="namaPenyakit">Nama Penyakit</b-form-checkbox>
+                                            <b-form-checkbox value="nama">Nama</b-form-checkbox>
+                                            <b-form-checkbox value="alamat">Alamat</b-form-checkbox>
+                                            <!-- <b-form-checkbox value="pekerjaan">Pekerjaan</b-form-checkbox> -->
                                          
                                         </b-form-checkbox-group>
                                     </b-form-group>
@@ -88,41 +89,44 @@
                             </b-col>
                         </b-row>
 
-                        <b-table
-                            show-empty
-                            bordered
-                            hover
-                            :items="items"
-                            :fields="fields"
-                            :current-page="currentPage"
-                            :per-page="perPage"
-                            :filter="filter"
-                            :filter-included-fields="filterOn"
-                            :sort-by.sync="sortBy"
-                            :sort-desc.sync="sortDesc"
-                            :sort-direction="sortDirection"
-                            @filtered="onFiltered"
-                            class="m-t-15"
-                            responsive
-                            >
-                            <!-- <template v-slot:cell(name)="row">
-                                {{ row.value.first }} {{ row.value.last }}
-                            </template> -->
+                        <b-row>
+                            <b-col lg="12">
+                                <b-table
+                                    show-empty
+                                    bordered
+                                    hover
+                                    :items="items"
+                                    :fields="fields"
+                                    :current-page="currentPage"
+                                    :per-page="perPage"
+                                    :filter="filter"
+                                    :filter-included-fields="filterOn"
+                                    :sort-by.sync="sortBy"
+                                    :sort-desc.sync="sortDesc"
+                                    :sort-direction="sortDirection"
+                                    @filtered="onFiltered"
+                                    class="m-t-15"
+                                    responsive
+                                    >
+                                    <!-- <template v-slot:cell(name)="row">
+                                        {{ row.value.first }} {{ row.value.last }}
+                                    </template> -->
 
-                            <template v-slot:cell(actions)="row">
-                                <b-button size="sm" variant="warning" @click="info(row.item, row.index, $event.target)" class="mr-1">
-                               Edit
-                                </b-button>
-                                 <b-button size="sm" variant="danger" @click="hapus(row.item.id)" class="mr-1">
-                                Hapus
-                                </b-button>
-                            </template>
+                                    <template v-slot:cell(actions)="row">
+                                        <router-link :to="'screeningpasien'">
+                                        <b-button size="sm" variant="success" class="mr-1">Screening</b-button>
+                                        </router-link>
+                                        <b-button size="sm" variant="warning" @click="rubah(row.item, row.index, $event.target)" class="mr-1">Edit</b-button>
+                                        <b-button size="sm" variant="danger" @click="hapus(row.item.id)" class="mr-1">Hapus</b-button>
+                                    </template>
 
-                         
-                        </b-table>
+                                
+                                </b-table>
+                            </b-col>
+                        </b-row>
 
                         <b-row>
-                           <b-col sm="5" md="6" class="my-1">
+                            <b-col sm="5" md="6" class="my-1">
                                 <b-form-group
                                 label="Per page"
                                 label-cols-sm="6"
@@ -153,50 +157,114 @@
                                 ></b-pagination>
                             </b-col>
                         </b-row>
-                        <!-- Info modal -->
-                        <b-modal :id="infoModal.id" hide-footer centered :title="infoModal.title" ok-only @hide="resetInfoModal">
-                            <!-- <pre>{{ infoModal.content.namaPenyakit }}</pre> -->
-                             <b-form class="bv-example-row">
-                                <b-form-group 
-                                label="Riwayat Penyakit" 
-                                >
-                                <!-- {{infoModal.content.namaPenyakit}}
-                                 -->
-                                   
-                                  <b-form-input
-                                  v-model="namaPenyakitEdit"
-                                    required
-                                    placeholder=""
-                     
-                                  ></b-form-input>
-                                    <b-button @click="edit" variant="primary" class="m-t-15">Simpan</b-button>
-                                </b-form-group>
-                                
-                            </b-form>
-                        </b-modal>
+
+
                     </div>
-                    
                 </b-col>
             </b-row>
         </b-container>
 
-        <b-modal id="modal-1" hide-footer centered title="TAMBAH DATA MASTER RIWAYAT PENYAKIT">
+        <!-- modal insert -->
+        <b-modal id="modal-1" centered hide-footer title="TAMBAH DATA PASIEN">
             <b-form class="bv-example-row">
-                <b-form-group 
-                label="Riwayat Penyakit" 
-                >
-                  <b-form-input
-                  v-model="namaPenyakit"
-                    required
-                    placeholder=""
-                   
-                  ></b-form-input>
-                    <b-button @click="tambah" variant="primary" class="m-t-15">Simpan</b-button>
+                <b-form-group label="Nama">
+                    <b-form-input 
+                        v-model="formm.nama"
+                        required
+                        placeholder=""
+                    ></b-form-input>
                 </b-form-group>
-                
+
+                <b-form-group label="Umur">
+                    <b-form-input 
+                        v-model="formm.umur"
+                        required
+                        placeholder=""
+                    ></b-form-input>
+                </b-form-group>
+
+                <b-form-group label="Tempat Lahir">
+                    <b-form-input 
+                        v-model="formm.tempatLahir"
+                        required
+                        placeholder=""
+                    ></b-form-input>
+                </b-form-group>
+
+                <b-form-group label="Tanggal Lahir">
+                    <b-form-datepicker id="example-datepicker"  v-model="formm.tanggalLahir" required></b-form-datepicker>
+                </b-form-group>
+
+                <b-form-group label="Alamat">
+                    <b-form-input 
+                        v-model="formm.alamat"
+                        required
+                        placeholder=""
+                    ></b-form-input>
+                </b-form-group>
+
+                <b-form-group label="Pekerjaan">
+                    <b-form-input 
+                        v-model="formm.pekerjaan"
+                        required
+                        placeholder=""
+                    ></b-form-input>
+                </b-form-group>
+
+                <b-button @click="tambah" variant="primary">Simpan</b-button>
             </b-form>
         </b-modal>
 
+        <!-- Modal Edit -->
+        <b-modal :id="infoModal.id" centered :title="infoModal.title" ok-only hide-footer @hide="resetInfoModal">
+            <b-form class="bv-example-row">
+                <b-form-group label="Nama">
+                    <b-form-input 
+                        v-model="formm.nama"
+                        required
+                        placeholder=""
+                    ></b-form-input>
+                </b-form-group>
+
+                <b-form-group label="Umur">
+                    <b-form-input 
+                        v-model="formm.umur"
+                        required
+                        placeholder=""
+                    ></b-form-input>
+                </b-form-group>
+
+                <b-form-group label="Tempat Lahir">
+                    <b-form-input 
+                        v-model="formm.tempatLahir"
+                        required
+                        placeholder=""
+                    ></b-form-input>
+                </b-form-group>
+
+                <b-form-group label="Tanggal Lahir">
+                    <b-form-datepicker id="example-datepicker"  v-model="formm.tanggalLahir" required></b-form-datepicker>
+                </b-form-group>
+
+                <b-form-group label="Alamat">
+                    <b-form-input 
+                        v-model="formm.alamat"
+                        required
+                        placeholder=""
+                    ></b-form-input>
+                </b-form-group>
+
+                <b-form-group label="Pekerjaan">
+                    <b-form-input 
+                        v-model="formm.pekerjaan"
+                        required
+                        placeholder=""
+                    ></b-form-input>
+                </b-form-group>
+                                     
+                <b-button @click="edit" variant="primary">Simpan</b-button>
+            </b-form>
+        </b-modal>      
        
     </div>
     
@@ -204,22 +272,34 @@
 <script>
 
 import myheader from "../../components/header"
+
 import axios from 'axios';
 export default {
-    name:"RiwayatPenyakit",
+    name:"Pernyataan",
     components:{
         myheader
     },
     data() {
       return {
-        namaPenyakit: '',
+          formm:{
+                nama: '',
+                umur: '',
+                tempatLahir: '',
+                tanggalLahir:'',
+                alamat:'',
+                pekerjaan:'',
+                
+          },
+     
         idChoose: '',
-        namaPenyakitEdit:'',
         items: [
          
         ],
         fields: [
-          { key: 'namaPenyakit', label: 'Nama Penyakit', sortable: true, sortDirection: 'desc' },
+            { key: 'nama', label: 'Nama', sortable: true, sortDirection: 'desc' },
+            { key: 'alamat', label: 'Alamat', sortable: true, sortDirection: 'desc' },
+            { key: 'tempatLahir', label: 'Tempat Lahir', sortable: true, sortDirection: 'desc' },
+            { key: 'tanggalLahir', label: 'Tanggal Lahir', sortable: true, sortDirection: 'desc' },
           // { key: 'age', label: 'Person age', sortable: true, class: 'text-center' },
           // {
           //   key: 'isActive',
@@ -262,7 +342,7 @@ export default {
     mounted() {
       // Set the initial number of items
     
-        axios.get('http://sideku.org:8801/penyakit/all',{
+        axios.get('http://sideku.org:8801/pasien/all',{
            headers: {
                   'accesstoken': localStorage.getItem('token')
               }
@@ -273,16 +353,19 @@ export default {
               })
     },
     methods: {
-      info(item, index, button) {
-        this.infoModal.title = `EDIT DATA MASTER RIWAYAT PENYAKIT`
-        this.infoModal.content = item
+      rubah(item, index, button) {
+       
+        this.infoModal.title = `Edit Data Pasien`
+        // this.infoModal.content = item
+        // console.log(item)
         // console.log( item.namaPenyakit)
         //keluarkan model sesuai id
         this.idChoose = item.id
-        this.namaPenyakitEdit = item.namaPenyakit
+        this.formm = item
         this.$root.$emit('bv::show::modal', this.infoModal.id, button)
       },
       resetInfoModal() {
+        this.resetForm();
         this.infoModal.title = ''
         this.infoModal.content = ''
       },
@@ -291,13 +374,18 @@ export default {
         this.totalRows = filteredItems.length
         this.currentPage = 1
       },
-    
+        resetForm(){
+            this.formm = {
+                 nama: '',
+                pekerjaan:'',
+                alamat:'',
+          }
+        },
       tambah(){
              let vm = this;
-           axios.post('http://sideku.org:8801/penyakit/register', {
-                 namaPenyakit: this.namaPenyakit
-               
-              },{
+             let isiForm = vm.formm
+       
+           axios.post('http://sideku.org:8801/pasien/register', isiForm,{
                   headers: {
                           'accesstoken': localStorage.getItem('token')
                       }
@@ -305,8 +393,9 @@ export default {
               .then(function (response) {
                 console.log(response);
                   alert('berhasil')
+                  vm.resetForm();
                 vm.items.unshift(response.data)
-                vm.$root.$emit('bv::hide::modal', 'modal-1')
+                 vm.$root.$emit('bv::hide::modal', 'modal-1')
                
               })
               .catch(function (error) {
@@ -317,10 +406,8 @@ export default {
 
         edit(){
             let vm = this;
-           axios.patch('http://sideku.org:8801/penyakit/'+this.idChoose, {
-                 namaPenyakit: this.namaPenyakitEdit
-               
-              },{
+            let dataForm = vm.formm
+           axios.patch('http://sideku.org:8801/pasien/'+this.idChoose,dataForm,{
               headers: {
                       'accesstoken': localStorage.getItem('token')
                   }
@@ -331,8 +418,12 @@ export default {
                 alert('berhasil')
                 let idx = vm.items.findIndex(o => o.id === vm.idChoose );
                 // console.log(idx)
-                vm.items[idx].namaPenyakit = vm.namaPenyakitEdit
-                vm.$root.$emit('bv::hide::modal')
+                //item diganti form sekarang
+                vm.items[idx] = vm.form
+                vm.resetForm();
+                // vm.$root.$emit('bv::hide::modal', 'modal-1')
+                vm.$root.$emit('bv::hide::modal', vm.infoModal.id)
+                // vm.$refs['modal-1'].hide()
                
               })
               .catch(function (error) {
@@ -342,7 +433,7 @@ export default {
       },
            hapus(id){
                 let vm = this;
-           axios.delete('http://sideku.org:8801/penyakit/delete/'+id,{
+           axios.delete('http://sideku.org:8801/pasien/delete/'+id,{
               headers: {
                       'accesstoken': localStorage.getItem('token')
                   }

@@ -7,6 +7,8 @@ import GejalaFisik from "../views/loggedin/GejalaFisik.vue";
 import GejalaPsikis from "../views/loggedin/GejalaPsikis.vue";
 import GejalaPerilakuBuruk from "../views/loggedin/GejalaPerilakuBuruk.vue";
 import MasterPernyataan from "../views/loggedin/MasterPernyataan";
+import screening from "../views/loggedin/screening";
+import ScreeningPasien from "../views/loggedin/ScreeningPasien";
 import dashboard from "../views/loggedin/dashboard.vue";
 Vue.use(VueRouter);
 
@@ -69,6 +71,24 @@ const routes = [
     path: '/masterpernyataan',
     name: 'masterpernyataan',
     component: MasterPernyataan,
+    meta: {
+        requiresAuth: true
+    }
+  },
+
+  {
+    path: '/screening',
+    name: 'screening',
+    component: screening,
+    meta: {
+        requiresAuth: true
+    }
+  },
+
+  {
+    path: '/screeningpasien',
+    name: 'ScreeningPasien',
+    component: ScreeningPasien,
     meta: {
         requiresAuth: true
     }

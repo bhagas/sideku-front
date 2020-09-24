@@ -4,16 +4,29 @@
     <div id="masterPernyataan">
         <myheader></myheader>
         <b-container>
-            <b-row class="m-t-30">
-                <b-col md="12">
-                    <h3 class="text-center m-t-0 m-b-0"><strong>Master Pernyataan</strong></h3>
-                </b-col>
-            </b-row>
-            <b-row class="m-t-30">
-                <b-col md="8" offset-md="2">
+            <b-row>
+                <b-col md="12" style="margin-top:60px;margin-bottom:16px">
                     <div class="box">
                         <b-row>
-                           <b-col md="12">
+                            <b-col md="12">
+                                <h3 class="text-center m-t-0 m-b-0"><strong>DATA MASTER PERNYATAAN</strong></h3>
+                            </b-col>
+                        </b-row>
+                        <b-row class="m-t-15">
+                            <b-col md="12">
+                                <b-breadcrumb>
+                                    <b-breadcrumb-item>
+                                        <router-link :to="'dashboard'">
+                                            <b-icon icon="house-fill" scale="1.25" shift-v="1.25" aria-hidden="true"></b-icon>
+                                            Dashboard
+                                        </router-link>
+                                    </b-breadcrumb-item>
+                                    <b-breadcrumb-item active>Data Master Pernyataan</b-breadcrumb-item>
+                                </b-breadcrumb>
+                            </b-col>
+                        </b-row>
+                        <b-row class="m-t-15">
+                           <b-col md="12" class="m-t-15">
                                 <b-button v-b-modal.modal-1 variant="primary">Tambah Data</b-button>
                            </b-col>
                         </b-row>
@@ -87,18 +100,19 @@
                             :sort-desc.sync="sortDesc"
                             :sort-direction="sortDirection"
                             @filtered="onFiltered"
-                            class="m-t-30"
+                            class="m-t-15"
+                            responsive
                             >
                             <!-- <template v-slot:cell(name)="row">
                                 {{ row.value.first }} {{ row.value.last }}
                             </template> -->
 
                             <template v-slot:cell(actions)="row">
-                                <b-button size="sm" @click="info(row.item, row.index, $event.target)" class="mr-1">
-                               EDIT
+                                <b-button size="sm" variant="warning" @click="info(row.item, row.index, $event.target)" class="mr-1">
+                               Edit
                                 </b-button>
-                                 <b-button size="sm" @click="hapus(row.item.id)" class="mr-1">
-                                HAPUS
+                                 <b-button size="sm" variant="danger" @click="hapus(row.item.id)" class="mr-1">
+                                Hapus
                                 </b-button>
                             </template>
 
@@ -138,11 +152,11 @@
                             </b-col>
                         </b-row>
                         <!-- Info modal -->
-                        <b-modal :id="infoModal.id" :title="infoModal.title" ok-only @hide="resetInfoModal">
+                        <b-modal :id="infoModal.id" hide-footer centered :title="infoModal.title" ok-only @hide="resetInfoModal">
                     
                              <b-form class="bv-example-row">
                                 <b-form-group 
-                                label="Isi Pernyataan" 
+                                label="Pernyataan" 
                                 >
                              
                                    
@@ -152,7 +166,7 @@
                                     placeholder=""
                      
                                   ></b-form-input>
-                                    <b-button @click="edit" variant="primary">Simpan</b-button>
+                                    <b-button @click="edit" variant="primary" class="m-t-15">Simpan</b-button>
                                 </b-form-group>
                                 
                             </b-form>
@@ -163,7 +177,7 @@
             </b-row>
         </b-container>
 
-        <b-modal id="modal-1" title="Tambah Data Master Pernyataan">
+        <b-modal id="modal-1" hide-footer centered title="TAMBAH DATA MASTER PERNYATAAN">
             <b-form class="bv-example-row">
                 <b-form-group 
                 label="Pernyataan" 
@@ -174,7 +188,7 @@
                     placeholder=""
                    
                   ></b-form-input>
-                    <b-button @click="tambah" variant="primary">Simpan</b-button>
+                    <b-button @click="tambah" variant="primary" class="m-t-15">Simpan</b-button>
                 </b-form-group>
                 
             </b-form>
@@ -257,7 +271,7 @@ export default {
     },
     methods: {
       info(item, index, button) {
-        this.infoModal.title = `Row index: ${index}`
+        this.infoModal.title = `EDIT DATA MASTER PERNYATAAN`
         this.infoModal.content = item
         // console.log(item)
         // console.log( item.namaPenyakit)

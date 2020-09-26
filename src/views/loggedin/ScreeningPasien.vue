@@ -227,7 +227,7 @@ export default {
                this.penyakit = [];
                 data.data.respon.forEach((element) => {
                     let ob = {
-                        penyakitId : element.id,
+                        PenyakitId : element.id,
                         pasienId : this.$route.params.idPasien,
                         namaPenyakit: element.namaPenyakit
                     }
@@ -249,7 +249,7 @@ export default {
             this.gejalaFisik = []
                data.data.respon.forEach((element) => {
                     let ob = {
-                        gejalaFisikId : element.id,
+                        GejalaFisikId : element.id,
                         pasienId : this.$route.params.idPasien,
                         namaGejalaFisik: element.namaGejalaFisik
                     }
@@ -272,7 +272,7 @@ export default {
                   this.gejalaPsikis = []
                data.data.respon.forEach((element) => {
                     let ob = {
-                        gejalaPsikiId : element.id,
+                        GejalaPsikiId : element.id,
                         pasienId : this.$route.params.idPasien,
                         namaGejalaPsikis: element.namaGejalaPsikis
                     }
@@ -294,7 +294,7 @@ export default {
                    this.gejapaPerilakuBuruk = []
                data.data.respon.forEach((element) => {
                     let ob = {
-                        gejalaPerilakuBurukId : element.id,
+                        GejalaPerilakuBurukId : element.id,
                         pasienId : this.$route.params.idPasien,
                         namaGejalaPerilaku: element.namaGejalaPerilaku
                     }
@@ -374,17 +374,18 @@ export default {
             },
                submitData(){
                  let vm = this;
-                 let formData = new FormData();
-                 formData.append('pasienId', this.$route.params.idPasien);
-                 formData.append('namaFile', vm.urlHasil);
-                 formData.append('emosi', vm.emosi);
-                 formData.append('poolPenyakit', vm.penyakit);
-                 formData.append('poolGejalaFisik', vm.gejalaFisik);
-                 formData.append('poolGejalaPsikis', vm.gejalaPsikis);
-                 formData.append('poolGejalaPerilakuBuruk', vm.gejapaPerilakuBuruk);
-                 formData.append('poolPernyataan', vm.pernyataan);
-                 axios.post( 'http://sideku.org:8801/',
-                        formData,
+              
+                 axios.post( 'http://sideku.org:8801/pasien/screening', 
+                        {
+                            pasienId: this.$route.params.idPasien,
+                            namaFile: vm.urlHasil,
+                            emosi: vm.emosi,
+                            poolPenyakit : vm.penyakit,
+                            poolGejalaFisik: vm.gejalaFisik,
+                            poolGejalaPsikis: vm.gejalaPsikis,
+                            poolGejalaPerilakuBuruk: vm.gejapaPerilakuBuruk,
+                            poolPernyataan: vm.pernyataan
+                        },
                         {
                             headers: {
                                 'accesstoken': localStorage.getItem('token')
@@ -392,7 +393,7 @@ export default {
                         }
                         ).then(function(ress){
                         console.log(ress);
-                      
+                      vm.$swal('Berhasil', ':)', 'success');
                         })
                         .catch(function(errr){
                         console.log(errr);

@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+// import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import RiwayatPenyakit from "../views/loggedin/RiwayatPenyakit.vue";
 import GejalaFisik from "../views/loggedin/GejalaFisik.vue";
@@ -16,7 +16,10 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Login,
+    meta: {
+      guest: true
+    }
   },
   {
     path: "/login",

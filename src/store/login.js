@@ -2,7 +2,9 @@ import axios from 'axios';
 export default  {
     namespaced: true,
     state: () => ({ 
-        token: ''
+        token: '',
+        pesan : '',
+        proses: false
      }),
   
     mutations: { 
@@ -10,23 +12,36 @@ export default  {
             // `state` is the local module state
             localStorage.setItem('token', data)
             state.token = data;
+       
+          },
+          rubahPesan (state, data) {
+            // `state` is the local module state
+        
+            state.pesan = data;
+          },
+          rubahProses (state, data) {
+            // `state` is the local module state
+        
+            state.proses = data;
           }
      },
     actions: { 
     
         doLogin ({  commit }, dataLogin){
-           
+            commit('rubahProses', true)
             axios.post('http://sideku.org:8801/user/login', {
                  username: dataLogin.email,
                  password: dataLogin.password
                
               })
               .then(function (response) {
-                // console.log(response);
+                commit('rubahProses', false)
                 commit('rubahToken', response.data.token)
+                commit('rubahPesan', response.data.message)
               })
               .catch(function (error) {
                 console.log(error);
+                commit('rubahProses', false)
                 commit('rubahToken', '')
               });
             

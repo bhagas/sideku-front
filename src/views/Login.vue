@@ -8,6 +8,7 @@
               <h2 class="text-center">LOGIN SIDEKU</h2>
               <hr/>
               <b-form>
+                 <div v-if="pesan">{{pesan}}</div>
                 <b-form-group 
                 label="Username" 
                 >
@@ -51,8 +52,8 @@ export default {
     return{
       isLogin: false,
       email: '',
-      password: '',
-      proses: false
+      password: ''
+     
     };
   },
 
@@ -63,28 +64,27 @@ export default {
   watch:{
     //memperhatikan state token dari vuex store
    token(newValue, oldValue) {
-     if(newValue!= oldValue && newValue!=''){
-        this.proses= true;
+   
+     if(newValue!= oldValue && newValue!=''&& newValue!= undefined){
+       
         //lempar ke halaman dashboard
         (this.$route.query.tujuan)?
         this.$router.push({ path: this.$route.query.tujuan}): 
         this.$router.push({ name:"dashboard"})
         
      }
-   }
+   },
+
   },
 
-  created: {
-      
-  
-  },
+ 
 
   mounted:function(){
       console.log(this.$route.query.tujuan)
   },
 
   computed: {
-  ...mapState('Login', ['token']),
+  ...mapState('Login', ['token', 'pesan', 'proses']),
   ...mapGetters('Login',['cekLogin']),
 
   },
@@ -92,7 +92,7 @@ export default {
   methods:{
     ...mapActions('Login', [ 'doLogin', 'doLogout' ]),
     logindong: function(){
-      this.proses= true;
+     
       this.doLogin({email: this.email, password:this.password})
       //didalam do login state token di isi
     

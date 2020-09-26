@@ -36,8 +36,8 @@
                                     <b-collapse id="accordion-1" accordion="my-accordion" role="tabpanel">
                                         <b-card-body>
                                             <b-form class="bv-example-row">
-                                                <b-form-group :label="item.namaPenyakit" v-for="(item, index) in penyakit" :key="item.id">
-                                                    <b-form-input v-model="penyakit[index].lamaSakit"
+                                                <b-form-group :label="item.namaPenyakit" v-for="(item) in penyakit" :key="item.id">
+                                                    <b-form-input  v-model="item.lamaSakit"
 
                                                     ></b-form-input>
                                                 </b-form-group>
@@ -54,18 +54,15 @@
                                     </b-card-header>
                                     <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
                                         <b-card-body>
-                                            <b-form class="bv-example-row">
-                                                <b-form-file
-                                                    plain
-                                                ></b-form-file>
-
+                                      
+                                                <input type="file" id="file" ref="file" v-on:change="handleFileUpload"/>
+                                                 <button v-on:click="submitFiles">UPLOAD & SCAN</button>
                                                 <b-alert show variant="success" style="margin-top:15px">
-                                                    <h4 class="alert-heading">Sedih/Marah/Bahagia/Jijik/Takut/Terkejut/Netral</h4>
-                                                    <p>
-                                                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel esse consectetur fugit facere atque reiciendis autem, consequuntur rem provident officiis.
-                                                    </p>
+                                                    <h4 class="alert-heading">{{emosi}}</h4>
+                                                   <img v-if="urlPreview" :src="urlPreview" style="max-width: 300px;" />
+                                                   <img v-if="urlHasil" :src="'http://sideku.org:8841/hasilprediksi/'+urlHasil" style="max-width: 300px;" />
                                                 </b-alert>
-                                            </b-form>
+                                      
                                         </b-card-body>
                                     </b-collapse>
                                     </b-card>
@@ -75,34 +72,24 @@
                                         <b-button block v-b-toggle.accordion-3 variant="warning" style="text-align:left;text-transform:uppercase;font-weight:bold">Gejala Fisik</b-button>
                                     </b-card-header>
                                     <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
+                                        
                                         <b-card-body>
                                             <h5>Apa yang sedang Anda rasakan saat ini? </h5>
                                             <h6><i>Dapat memilih lebih dari satu sesuai dengan apa yang Anda rasakan saat ini</i></h6>
                                             <hr/>
+                                            
                                             <b-form class="bv-example-row">
-                                                <b-form-group label="Berkeringat Dingin">
-                                                    <b-form-select v-model="selected">
-                                                        <b-form-select-option :value="null">-- Pilih --</b-form-select-option>
-                                                        <b-form-select-option value="Ya">Ya</b-form-select-option>
-                                                        <b-form-select-option value="Tidak">Tidak</b-form-select-option>
+                                                 <b-form-group :label="item.namaGejalaFisik" v-for="(item) in gejalaFisik" :key="item.id">
+                                                   
+                                                    <b-form-select v-model="item.status">
+                                          
+                                                        <b-form-select-option value="0">Tidak</b-form-select-option>
+                                                        <b-form-select-option value="1">Ya</b-form-select-option>
+                                                        
                                                     </b-form-select>
                                                 </b-form-group>
 
-                                                <b-form-group label="Jantung Berdebar">
-                                                    <b-form-select v-model="selected">
-                                                        <b-form-select-option :value="null">-- Pilih --</b-form-select-option>
-                                                        <b-form-select-option value="Ya">Ya</b-form-select-option>
-                                                        <b-form-select-option value="Tidak">Tidak</b-form-select-option>
-                                                    </b-form-select>
-                                                </b-form-group>
-
-                                                <b-form-group label="Gemetar">
-                                                    <b-form-select v-model="selected">
-                                                        <b-form-select-option :value="null">-- Pilih --</b-form-select-option>
-                                                        <b-form-select-option value="Ya">Ya</b-form-select-option>
-                                                        <b-form-select-option value="Tidak">Tidak</b-form-select-option>
-                                                    </b-form-select>
-                                                </b-form-group>
+                                               
                                             </b-form>
                                         </b-card-body>
                                     </b-collapse>
@@ -118,29 +105,17 @@
                                             <h6><i>Dapat memilih lebih dari satu sesuai dengan apa yang Anda rasakan saat ini</i></h6>
                                             <hr/>
                                             <b-form class="bv-example-row">
-                                                <b-form-group label="Marah">
-                                                    <b-form-select v-model="selected">
-                                                        <b-form-select-option :value="null">-- Pilih --</b-form-select-option>
-                                                        <b-form-select-option value="Ya">Ya</b-form-select-option>
-                                                        <b-form-select-option value="Tidak">Tidak</b-form-select-option>
+                                                <b-form-group :label="item.namaGejalaPsikis" v-for="(item) in gejalaPsikis" :key="item.id">
+                                                   
+                                                    <b-form-select v-model="item.status">
+                                          
+                                                        <b-form-select-option value="0">Tidak</b-form-select-option>
+                                                        <b-form-select-option value="1">Ya</b-form-select-option>
+                                                        
                                                     </b-form-select>
                                                 </b-form-group>
 
-                                                <b-form-group label="Sakit Hati">
-                                                    <b-form-select v-model="selected">
-                                                        <b-form-select-option :value="null">-- Pilih --</b-form-select-option>
-                                                        <b-form-select-option value="Ya">Ya</b-form-select-option>
-                                                        <b-form-select-option value="Tidak">Tidak</b-form-select-option>
-                                                    </b-form-select>
-                                                </b-form-group>
-
-                                                <b-form-group label="Sedih">
-                                                    <b-form-select v-model="selected">
-                                                        <b-form-select-option :value="null">-- Pilih --</b-form-select-option>
-                                                        <b-form-select-option value="Ya">Ya</b-form-select-option>
-                                                        <b-form-select-option value="Tidak">Tidak</b-form-select-option>
-                                                    </b-form-select>
-                                                </b-form-group>
+                                               
                                             </b-form>
                                         </b-card-body>
                                     </b-collapse>
@@ -156,29 +131,17 @@
                                             <h6><i>Boleh memilih lebih dari satu sesuai dengan yang pernah dilakukan</i></h6>
                                             <hr/>
                                             <b-form class="bv-example-row">
-                                                <b-form-group label="Jarang Berdoa">
-                                                    <b-form-select v-model="selected">
-                                                        <b-form-select-option :value="null">-- Pilih --</b-form-select-option>
-                                                        <b-form-select-option value="Ya">Ya</b-form-select-option>
-                                                        <b-form-select-option value="Tidak">Tidak</b-form-select-option>
+                                               <b-form-group :label="item.namaGejalaPerilaku" v-for="(item) in gejapaPerilakuBuruk" :key="item.id">
+                                                   
+                                                    <b-form-select v-model="item.status">
+                                          
+                                                        <b-form-select-option value="0">Tidak</b-form-select-option>
+                                                        <b-form-select-option value="1">Ya</b-form-select-option>
+                                                        
                                                     </b-form-select>
                                                 </b-form-group>
 
-                                                <b-form-group label="Berfikir Negatif">
-                                                    <b-form-select v-model="selected">
-                                                        <b-form-select-option :value="null">-- Pilih --</b-form-select-option>
-                                                        <b-form-select-option value="Ya">Ya</b-form-select-option>
-                                                        <b-form-select-option value="Tidak">Tidak</b-form-select-option>
-                                                    </b-form-select>
-                                                </b-form-group>
-
-                                                <b-form-group label="Iri Hati">
-                                                    <b-form-select v-model="selected">
-                                                        <b-form-select-option :value="null">-- Pilih --</b-form-select-option>
-                                                        <b-form-select-option value="Ya">Ya</b-form-select-option>
-                                                        <b-form-select-option value="Tidak">Tidak</b-form-select-option>
-                                                    </b-form-select>
-                                                </b-form-group>
+                                                
                                             </b-form>
                                         </b-card-body>
                                     </b-collapse>
@@ -191,32 +154,26 @@
                                     <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel">
                                         <b-card-body>
                                             <b-form class="bv-example-row">
-                                                <b-form-group label="Saat saya ingin merasakan emosi positif yang lebih banyak (misal gembira atau senang), saya mengubah apa yang sedang saya pikirkan.">
-                                                    <b-form-select v-model="selected">
-                                                        <b-form-select-option :value="null">-- Pilih --</b-form-select-option>
-                                                        <b-form-select-option value="Tidak Pernah">Tidak Pernah</b-form-select-option>
-                                                        <b-form-select-option value="Jarang">Jarang</b-form-select-option>
-                                                        <b-form-select-option value="Sering">Sering</b-form-select-option>
-                                                        <b-form-select-option value="Selalu">Selalu</b-form-select-option>
+                                                <b-form-group :label="item.isiPernyataan" v-for="(item) in pernyataan" :key="item.id">
+                                                   
+                                                    <b-form-select v-model="item.status">
+                                          
+                                                    <b-form-select-option value="1">Tidak Pernah</b-form-select-option>
+                                                        <b-form-select-option value="2">Jarang</b-form-select-option>
+                                                        <b-form-select-option value="3">Sering</b-form-select-option>
+                                                        <b-form-select-option value="4">Selalu</b-form-select-option>
+                                                        
                                                     </b-form-select>
                                                 </b-form-group>
 
-                                                <b-form-group label="Saya menyimpan emosi saya untuk diri sendiri.">
-                                                    <b-form-select v-model="selected">
-                                                        <b-form-select-option :value="null">-- Pilih --</b-form-select-option>
-                                                        <b-form-select-option value="Tidak Pernah">Tidak Pernah</b-form-select-option>
-                                                        <b-form-select-option value="Jarang">Jarang</b-form-select-option>
-                                                        <b-form-select-option value="Sering">Sering</b-form-select-option>
-                                                        <b-form-select-option value="Selalu">Selalu</b-form-select-option>
-                                                    </b-form-select>
-                                                </b-form-group>
+                                                
                                             </b-form>
                                         </b-card-body>
                                     </b-collapse>
                                     </b-card>
                                 </div>
 
-                                 <b-button variant="primary" class="m-t-15">Simpan</b-button>
+                                 <b-button variant="primary" class="m-t-15" v-on:click="submitData">Simpan</b-button>
                             </b-col>
                         </b-row>
                     </div>
@@ -243,7 +200,11 @@ export default {
             gejalaFisik: [],
             gejalaPsikis: [],
             gejapaPerilakuBuruk: [],
-            pernyataan: []
+            pernyataan: [],
+            file: '',
+            urlPreview: null,
+            urlHasil: null,
+            emosi:''
         }
     },
     mounted() {
@@ -257,62 +218,190 @@ export default {
              
         })
         //load master
-        axios.get('http://sideku.org:8801/penyakit/all',{
+        axios.get('http://sideku.org:8801/penyakit/history/'+this.$route.params.idPasien,{
            headers: {
                   'accesstoken': localStorage.getItem('token')
               }
         }).then(data=>{
-            //    console.log(data.data.respon)
-              this.penyakit = data.data.respon
+                
+               this.penyakit = [];
+                data.data.respon.forEach((element) => {
+                    let ob = {
+                        penyakitId : element.id,
+                        pasienId : this.$route.params.idPasien,
+                        namaPenyakit: element.namaPenyakit
+                    }
+                    if(element.poolPenyakits.length >0){
+                        ob.lamaSakit = element.poolPenyakits[0].lamaSakit
+                    }else{
+                        ob.lamaSakit = 0;
+                    }
+                     this.penyakit.push(ob)
+                });
+             
              
         })
-         axios.get('http://sideku.org:8801/gejalafisik/all',{
+         axios.get('http://sideku.org:8801/gejalafisik/history/'+this.$route.params.idPasien,{
            headers: {
                   'accesstoken': localStorage.getItem('token')
               }
         }).then(data=>{
-            //    console.log(data.data.respon)
-              this.gejalaFisik = data.data.respon
+            this.gejalaFisik = []
+               data.data.respon.forEach((element) => {
+                    let ob = {
+                        gejalaFisikId : element.id,
+                        pasienId : this.$route.params.idPasien,
+                        namaGejalaFisik: element.namaGejalaFisik
+                    }
+                    if(element.PoolGejalaFisiks.length >0){
+                        ob.status = element.PoolGejalaFisiks[0].status
+                    }else{
+                        ob.status = 0;
+                    }
+                     this.gejalaFisik.push(ob)
+                });
+              
              
         })
-          axios.get('http://sideku.org:8801/gejalapsikis/all',{
+
+          axios.get('http://sideku.org:8801/gejalapsikis/history/'+this.$route.params.idPasien,{
            headers: {
                   'accesstoken': localStorage.getItem('token')
               }
         }).then(data=>{
-            //    console.log(data.data.respon)
-              this.gejalaPsikis = data.data.respon
+                  this.gejalaPsikis = []
+               data.data.respon.forEach((element) => {
+                    let ob = {
+                        gejalaPsikiId : element.id,
+                        pasienId : this.$route.params.idPasien,
+                        namaGejalaPsikis: element.namaGejalaPsikis
+                    }
+                    if(element.PoolGejalaPsikis.length >0){
+                        ob.status = element.PoolGejalaPsikis[0].status
+                    }else{
+                        ob.status = 0;
+                    }
+                     this.gejalaPsikis.push(ob)
+                });
+           
              
         })
-        axios.get('http://sideku.org:8801/gejalaperilakuburuk/all',{
+        axios.get('http://sideku.org:8801/gejalaperilakuburuk/history/'+this.$route.params.idPasien,{
            headers: {
                   'accesstoken': localStorage.getItem('token')
               }
         }).then(data=>{
-            //    console.log(data.data.respon)
-              this.gejapaPerilakuBuruk = data.data.respon
+                   this.gejapaPerilakuBuruk = []
+               data.data.respon.forEach((element) => {
+                    let ob = {
+                        gejalaPerilakuBurukId : element.id,
+                        pasienId : this.$route.params.idPasien,
+                        namaGejalaPerilaku: element.namaGejalaPerilaku
+                    }
+                    if(element.PoolGejalaPerilakus.length >0){
+                        ob.status = element.PoolGejalaPerilakus[0].status
+                    }else{
+                        ob.status = 0;
+                    }
+                     this.gejapaPerilakuBuruk.push(ob)
+                });
+          
              
         })
-         axios.get('http://sideku.org:8801/pernyataan/all',{
-           headers: {
-                  'accesstoken': localStorage.getItem('token')
-              }
-        }).then(data=>{
-            //    console.log(data.data.respon)
-              this.pernyataan = data.data.respon
-             
-        })
-    //get pool
-         axios.get('http://sideku.org:8801/poolpenyakit/all',{
+         axios.get('http://sideku.org:8801/pernyataan/history/'+this.$route.params.idPasien,{
            headers: {
                   'accesstoken': localStorage.getItem('token')
               }
         }).then(data=>{
                console.log(data.data.respon)
-             
+                 this.pernyataan = []
+               data.data.respon.forEach((element) => {
+                    let ob = {
+                        pernyataanId : element.id,
+                        pasienId : this.$route.params.idPasien,
+                        isiPernyataan: element.isiPernyataan
+                    }
+                    if(element.poolPernyataans.length >0){
+                        ob.status = element.poolPernyataans[0].status
+                    }else{
+                        ob.status = 1;
+                    }
+                     this.pernyataan.push(ob)
+                });
+            
              
         })
+           axios.get('http://sideku.org:8801/poolfotowajah/pasien/'+this.$route.params.idPasien,{
+           headers: {
+                  'accesstoken': localStorage.getItem('token')
+              }
+        }).then(data=>{
+            // console.log(data.data.respon)
+            if(data.data.respon.length>0){
+                this.emosi = data.data.respon[0].emosi
+                this.urlHasil = data.data.respon[0].namaFile
+            }
+             
+        })
+    },
+    methods:{
+         handleFileUpload(e){
+            //  console.log(e)
+             this.file = this.$refs.file.files[0];
+            //  console.log(this.file)
+              let fileEvent = e.target.files[0];
+              this.urlPreview = URL.createObjectURL(fileEvent);
+      },
+      submitFiles(){
+          let vm = this;
+          let formData = new FormData();
+          formData.append('foto', this.file);
+            axios.post( 'http://sideku.org:8841/proses_gambar',
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
+                ).then(function(ress){
+                // console.log(ress);
+                vm.emosi = ress.data.emosi[0]
+                vm.urlHasil = ress.data.nama_file
+                })
+                .catch(function(errr){
+                console.log(errr);
+                });
+            },
+               submitData(){
+                 let vm = this;
+                 let formData = new FormData();
+                 formData.append('pasienId', this.$route.params.idPasien);
+                 formData.append('namaFile', vm.urlHasil);
+                 formData.append('emosi', vm.emosi);
+                 formData.append('poolPenyakit', vm.penyakit);
+                 formData.append('poolGejalaFisik', vm.gejalaFisik);
+                 formData.append('poolGejalaPsikis', vm.gejalaPsikis);
+                 formData.append('poolGejalaPerilakuBuruk', vm.gejapaPerilakuBuruk);
+                 formData.append('poolPernyataan', vm.pernyataan);
+                 axios.post( 'http://sideku.org:8801/',
+                        formData,
+                        {
+                            headers: {
+                                'accesstoken': localStorage.getItem('token')
+                            }
+                        }
+                        ).then(function(ress){
+                        console.log(ress);
+                      
+                        })
+                        .catch(function(errr){
+                        console.log(errr);
+                        });
+         
+            }
+      
     }
+    
 }
 </script>
 <style scoped>

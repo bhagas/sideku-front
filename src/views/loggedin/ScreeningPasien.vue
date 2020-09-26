@@ -36,23 +36,13 @@
                                     <b-collapse id="accordion-1" accordion="my-accordion" role="tabpanel">
                                         <b-card-body>
                                             <b-form class="bv-example-row">
-                                                <b-form-group label="DM">
-                                                    <b-form-input
+                                                <b-form-group :label="item.namaPenyakit" v-for="(item, index) in penyakit" :key="item.id">
+                                                    <b-form-input v-model="penyakit[index].lamaSakit"
 
                                                     ></b-form-input>
                                                 </b-form-group>
 
-                                                <b-form-group label="Hipertensi">
-                                                    <b-form-input
-                                                    
-                                                    ></b-form-input>
-                                                </b-form-group>
-
-                                                <b-form-group label="Kolesterol">
-                                                    <b-form-input
-                                                    
-                                                    ></b-form-input>
-                                                </b-form-group>
+                                               
                                             </b-form>
                                         </b-card-body>
                                     </b-collapse>
@@ -237,6 +227,7 @@
 </template>
 <script>
 import myheader from "../../components/header"
+import axios from "axios"
 export default {
     name:"ScreeningPasien",
     components:{
@@ -244,9 +235,83 @@ export default {
     },
 
     data(){
+        
         return{
-            selected: null
+            selected: null,
+            pasien: {},
+            penyakit: [],
+            gejalaFisik: [],
+            gejalaPsikis: [],
+            gejapaPerilakuBuruk: [],
+            pernyataan: []
         }
+    },
+    mounted() {
+           axios.get('http://sideku.org:8801/pasien/'+this.$route.params.idPasien,{
+           headers: {
+                  'accesstoken': localStorage.getItem('token')
+              }
+        }).then(data=>{
+            //    console.log(data.data.respon[0])
+               this.pasien = data.data.respon[0]
+             
+        })
+        //load master
+        axios.get('http://sideku.org:8801/penyakit/all',{
+           headers: {
+                  'accesstoken': localStorage.getItem('token')
+              }
+        }).then(data=>{
+            //    console.log(data.data.respon)
+              this.penyakit = data.data.respon
+             
+        })
+         axios.get('http://sideku.org:8801/gejalafisik/all',{
+           headers: {
+                  'accesstoken': localStorage.getItem('token')
+              }
+        }).then(data=>{
+            //    console.log(data.data.respon)
+              this.gejalaFisik = data.data.respon
+             
+        })
+          axios.get('http://sideku.org:8801/gejalapsikis/all',{
+           headers: {
+                  'accesstoken': localStorage.getItem('token')
+              }
+        }).then(data=>{
+            //    console.log(data.data.respon)
+              this.gejalaPsikis = data.data.respon
+             
+        })
+        axios.get('http://sideku.org:8801/gejalaperilakuburuk/all',{
+           headers: {
+                  'accesstoken': localStorage.getItem('token')
+              }
+        }).then(data=>{
+            //    console.log(data.data.respon)
+              this.gejapaPerilakuBuruk = data.data.respon
+             
+        })
+         axios.get('http://sideku.org:8801/pernyataan/all',{
+           headers: {
+                  'accesstoken': localStorage.getItem('token')
+              }
+        }).then(data=>{
+            //    console.log(data.data.respon)
+              this.pernyataan = data.data.respon
+             
+        })
+    //get pool
+         axios.get('http://sideku.org:8801/poolpenyakit/all',{
+           headers: {
+                  'accesstoken': localStorage.getItem('token')
+              }
+        }).then(data=>{
+               console.log(data.data.respon)
+             
+             
+        })
     }
 }
 </script>

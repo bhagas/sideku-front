@@ -113,7 +113,8 @@
                                     </template> -->
 
                                     <template v-slot:cell(actions)="row">
-                                        <router-link :to="'screeningpasien'">
+
+                                        <router-link :to="'/screeningpasien/'+row.item.id">
                                         <b-button size="sm" variant="success" class="mr-1">Screening</b-button>
                                         </router-link>
                                         <b-button size="sm" variant="warning" @click="rubah(row.item, row.index, $event.target)" class="mr-1">Edit</b-button>

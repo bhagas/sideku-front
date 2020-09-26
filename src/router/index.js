@@ -86,7 +86,7 @@ const routes = [
   },
 
   {
-    path: '/screeningpasien',
+    path: '/screeningpasien/:idPasien',
     name: 'ScreeningPasien',
     component: ScreeningPasien,
     meta: {

@@ -176,13 +176,7 @@
                     ></b-form-input>
                 </b-form-group>
 
-                <b-form-group label="Umur">
-                    <b-form-input 
-                        v-model="formm.umur"
-                        required
-                        placeholder=""
-                    ></b-form-input>
-                </b-form-group>
+             
 
                 <b-form-group label="Tempat Lahir">
                     <b-form-input 
@@ -227,14 +221,7 @@
                     ></b-form-input>
                 </b-form-group>
 
-                <b-form-group label="Umur">
-                    <b-form-input 
-                        v-model="formm.umur"
-                        required
-                        placeholder=""
-                    ></b-form-input>
-                </b-form-group>
-
+               
                 <b-form-group label="Tempat Lahir">
                     <b-form-input 
                         v-model="formm.tempatLahir"
@@ -284,7 +271,6 @@ export default {
       return {
           formm:{
                 nama: '',
-                umur: '',
                 tempatLahir: '',
                 tanggalLahir:'',
                 alamat:'',

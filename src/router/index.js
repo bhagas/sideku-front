@@ -10,6 +10,8 @@ import MasterPernyataan from "../views/loggedin/MasterPernyataan";
 import screening from "../views/loggedin/screening";
 import ScreeningPasien from "../views/loggedin/ScreeningPasien";
 import dashboard from "../views/loggedin/dashboard.vue";
+import Daftar from "../views/loggedin/Daftar.vue";
+import ScreeningPasienFront from "../views/loggedin/ScreeningPasienFront";
 Vue.use(VueRouter);
 
 const routes = [
@@ -25,6 +27,22 @@ const routes = [
     path: "/login",
     name: "login",
     component: Login,
+    meta: {
+      guest: true
+    }
+  },
+  {
+    path: "/daftar",
+    name: "daftar",
+    component: Daftar,
+    meta: {
+      guest: true
+    }
+  },
+  {
+    path: "/screeningfront/:idPasien",
+    name: "ScreeningPasienFront",
+    component: ScreeningPasienFront,
     meta: {
       guest: true
     }

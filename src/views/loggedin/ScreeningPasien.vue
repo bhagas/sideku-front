@@ -10,7 +10,7 @@
                                 <h3 class="text-center m-t-0 m-b-0"><strong>SCREENING PASIEN</strong></h3>
                             </b-col>
                         </b-row>
-
+ 
                         <b-row class="m-t-15">
                             <b-col md="12">
                                 <b-breadcrumb>
@@ -56,9 +56,9 @@
                                     </b-card-header>
                                     <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
                                         <b-card-body>
-                                      
-                                                <input type="file" id="file" ref="file" v-on:change="handleFileUpload"/>
-                                                 <button v-on:click="submitFiles">UPLOAD & SCAN</button>
+                                            <h6><i>Pastikan gambar wajah anda tegak lurus</i></h6>
+       
+                                                 <input placeholder="ambil gambar wajah" id="file" ref="file" type="file" accept="image/*"  capture v-on:change="handleFileUpload" >
                                                 <b-alert show variant="success" style="margin-top:15px">
                                                     <h4 class="alert-heading">{{emosi}}</h4>
                                                    <img v-if="urlPreview" :src="urlPreview" style="max-width: 300px;" />
@@ -190,11 +190,13 @@
 </template>
 <script>
 import myheader from "../../components/header"
+
 import axios from "axios"
 export default {
     name:"ScreeningPasien",
     components:{
-        myheader
+        myheader,
+     
     },
 
     data(){
@@ -364,13 +366,7 @@ export default {
         })
     },
     methods:{
-         handleFileUpload(e){
-            //  console.log(e)
-             this.file = this.$refs.file.files[0];
-            //  console.log(this.file)
-              let fileEvent = e.target.files[0];
-              this.urlPreview = URL.createObjectURL(fileEvent);
-      },
+       
       loading(){
            let vm = this;
             vm.$swal({
@@ -405,6 +401,15 @@ export default {
                 vm.$swal.close()
                 });
             },
+                handleFileUpload(e){
+            //  console.log(e)
+            
+             this.file = this.$refs.file.files[0];
+              console.log(this.$refs.file.files)
+              let fileEvent = e.target.files[0];
+              this.urlPreview = URL.createObjectURL(fileEvent);
+              this.submitFiles()
+      },
                submitData(){
                  let vm = this;
                      this.loading();

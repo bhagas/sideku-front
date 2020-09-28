@@ -14,12 +14,12 @@
                         <b-row class="m-t-15">
                             <b-col md="12">
                                 <b-breadcrumb>
-                                    <b-breadcrumb-item href="#home">
+                                    <b-breadcrumb-item href="/dashboard">
                                     <b-icon icon="house-fill" scale="1.25" shift-v="1.25" aria-hidden="true"></b-icon>
                                     Dashboard
                                     </b-breadcrumb-item>
                                     
-                                    <b-breadcrumb-item><router-link :to="'screening'">Data Pasien</router-link></b-breadcrumb-item>
+                                    <b-breadcrumb-item><router-link :to="'/screening'">Data Pasien</router-link></b-breadcrumb-item>
                                     
                                     <b-breadcrumb-item active>Screening Pasien</b-breadcrumb-item>
                                 </b-breadcrumb>
@@ -31,12 +31,14 @@
                                 <div class="accordion" role="tablist">
                                     <b-card no-body class="mb-1">
                                     <b-card-header header-tag="header" class="p-1" role="tab">
-                                        <b-button block v-b-toggle.accordion-1 variant="warning" style="text-align:left;text-transform:uppercase;font-weight:bold">Riwayat Penyakit</b-button>
+                                        <b-button block v-b-toggle.accordion-1 variant="warning" style="text-align:left;text-transform:uppercase;font-weight:bold">Riwayat Penyakit - <span>Lama sakit (hari)</span></b-button>
                                     </b-card-header>
                                     <b-collapse id="accordion-1" accordion="my-accordion" role="tabpanel">
                                         <b-card-body>
                                             <b-form class="bv-example-row">
+                                              
                                                 <b-form-group :label="item.namaPenyakit" v-for="(item) in penyakit" :key="item.id">
+                                                    
                                                     <b-form-input  v-model="item.lamaSakit"
 
                                                     ></b-form-input>
@@ -56,8 +58,7 @@
                                         <b-card-body>
                                             <h6><i>Pastikan gambar wajah anda tegak lurus</i></h6>
        
-                                                 <b-form-file placeholder="ambil gambar wajah" id="file" ref="file" type="file" accept="image/*"  capture="camera" v-on:change="handleFileUpload" ></b-form-file>
-                                                 <!-- <button v-on:click="submitFiles">UPLOAD & SCAN</button> -->
+                                                 <input placeholder="ambil gambar wajah" id="file" ref="file" type="file" accept="image/*"  capture v-on:change="handleFileUpload" >
                                                 <b-alert show variant="success" style="margin-top:15px">
                                                     <h4 class="alert-heading">{{emosi}}</h4>
                                                    <img v-if="urlPreview" :src="urlPreview" style="max-width: 300px;" />
@@ -173,8 +174,12 @@
                                     </b-collapse>
                                     </b-card>
                                 </div>
-
-                                 <b-button variant="primary" class="m-t-15" v-on:click="submitData">Simpan</b-button>
+                                   <b-alert show variant="success" style="margin-top:15px">
+                                                    <h4 class="alert-heading">Skor: {{nilaiPernyataan}}</h4>
+                                                
+                                                </b-alert>
+                                  
+                                 <b-button variant="primary" class="m-t-15" v-on:click="submitData">Simpan </b-button>
                             </b-col>
                         </b-row>
                     </div>
@@ -207,7 +212,20 @@ export default {
             file: '',
             urlPreview: null,
             urlHasil: null,
-            emosi:''
+            emosi:'',
+            nilaiPernyataan: 0
+        }
+    },
+    watch:{
+        //watching object dalam array pernyataan
+         pernyataan: {
+            handler: function(newValue) {
+                    this.nilaiPernyataan = 0;
+                  newValue.forEach((element) => {
+                          this.nilaiPernyataan+= parseInt(element.status)
+                      })
+            },
+            deep: true
         }
     },
     mounted() {
@@ -348,10 +366,22 @@ export default {
         })
     },
     methods:{
-     
+       
+      loading(){
+           let vm = this;
+            vm.$swal({
+            title: 'Mohon Tunggu...',
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            onOpen: () => {
+            vm.$swal.showLoading();
+            }
+        })
+      },
       submitFiles(){
           let vm = this;
           let formData = new FormData();
+              this.loading();
           formData.append('foto', this.file);
             axios.post( 'http://sideku.org:8841/proses_gambar',
                 formData,
@@ -364,22 +394,25 @@ export default {
                 // console.log(ress);
                 vm.emosi = ress.data.emosi[0]
                 vm.urlHasil = ress.data.nama_file
+                 vm.$swal.close()
                 })
                 .catch(function(errr){
                 console.log(errr);
+                vm.$swal.close()
                 });
             },
                 handleFileUpload(e){
             //  console.log(e)
+            
              this.file = this.$refs.file.files[0];
-            //  console.log(this.file)
+              console.log(this.$refs.file.files)
               let fileEvent = e.target.files[0];
               this.urlPreview = URL.createObjectURL(fileEvent);
               this.submitFiles()
       },
                submitData(){
                  let vm = this;
-              
+                     this.loading();
                  axios.post( 'http://sideku.org:8801/pasien/screening', 
                         {
                             pasienId: this.$route.params.idPasien,
@@ -398,10 +431,13 @@ export default {
                         }
                         ).then(function(ress){
                         console.log(ress);
+                          vm.$swal.close()
                       vm.$swal('Berhasil', ':)', 'success');
                         })
                         .catch(function(errr){
-                        console.log(errr);
+                              vm.$swal('Gagal', errr, 'error');
+                              vm.$swal.close()
+                        // console.log(errr);
                         });
          
             }

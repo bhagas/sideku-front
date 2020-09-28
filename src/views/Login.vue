@@ -71,9 +71,17 @@ export default {
         (this.$route.query.tujuan)?
         this.$router.push({ path: this.$route.query.tujuan}): 
         this.$router.push({ name:"dashboard"})
-        
+        this.$swal.close()
      }
    },
+   proses(newValue){
+     let vm = this;
+     if(newValue==true){
+       this.loading()
+     }else{
+         vm.$swal.close()
+     }
+   }
 
   },
 
@@ -101,6 +109,17 @@ export default {
       this.doLogout()
       // this.isLogin =  this.cekLogin
     },
+     loading(){
+           let vm = this;
+            vm.$swal({
+            title: 'Mohon Tunggu...',
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            onOpen: () => {
+            vm.$swal.showLoading();
+            }
+        })
+      },
   }
 };
 </script>

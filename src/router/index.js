@@ -35,17 +35,13 @@ const routes = [
     path: "/daftar",
     name: "daftar",
     component: Daftar,
-    meta: {
-      guest: true
-    }
+  
   },
   {
     path: "/screeningfront/:idPasien",
     name: "ScreeningPasienFront",
     component: ScreeningPasienFront,
-    meta: {
-      guest: true
-    }
+  
   },
   {
     path: '/dashboard',

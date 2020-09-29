@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+// import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import RiwayatPenyakit from "../views/loggedin/RiwayatPenyakit.vue";
 import GejalaFisik from "../views/loggedin/GejalaFisik.vue";
@@ -10,13 +10,18 @@ import MasterPernyataan from "../views/loggedin/MasterPernyataan";
 import screening from "../views/loggedin/screening";
 import ScreeningPasien from "../views/loggedin/ScreeningPasien";
 import dashboard from "../views/loggedin/dashboard.vue";
+import Daftar from "../views/loggedin/Daftar.vue";
+import ScreeningPasienFront from "../views/loggedin/ScreeningPasienFront";
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Login,
+    meta: {
+      guest: true
+    }
   },
   {
     path: "/login",
@@ -25,6 +30,18 @@ const routes = [
     meta: {
       guest: true
     }
+  },
+  {
+    path: "/daftar",
+    name: "daftar",
+    component: Daftar,
+  
+  },
+  {
+    path: "/screeningfront/:idPasien",
+    name: "ScreeningPasienFront",
+    component: ScreeningPasienFront,
+  
   },
   {
     path: '/dashboard',
@@ -86,7 +103,7 @@ const routes = [
   },
 
   {
-    path: '/screeningpasien',
+    path: '/screeningpasien/:idPasien',
     name: 'ScreeningPasien',
     component: ScreeningPasien,
     meta: {

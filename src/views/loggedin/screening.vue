@@ -113,7 +113,8 @@
                                     </template> -->
 
                                     <template v-slot:cell(actions)="row">
-                                        <router-link :to="'screeningpasien'">
+
+                                        <router-link :to="'/screeningpasien/'+row.item.id">
                                         <b-button size="sm" variant="success" class="mr-1">Screening</b-button>
                                         </router-link>
                                         <b-button size="sm" variant="warning" @click="rubah(row.item, row.index, $event.target)" class="mr-1">Edit</b-button>
@@ -175,13 +176,7 @@
                     ></b-form-input>
                 </b-form-group>
 
-                <b-form-group label="Umur">
-                    <b-form-input 
-                        v-model="formm.umur"
-                        required
-                        placeholder=""
-                    ></b-form-input>
-                </b-form-group>
+             
 
                 <b-form-group label="Tempat Lahir">
                     <b-form-input 
@@ -226,14 +221,7 @@
                     ></b-form-input>
                 </b-form-group>
 
-                <b-form-group label="Umur">
-                    <b-form-input 
-                        v-model="formm.umur"
-                        required
-                        placeholder=""
-                    ></b-form-input>
-                </b-form-group>
-
+               
                 <b-form-group label="Tempat Lahir">
                     <b-form-input 
                         v-model="formm.tempatLahir"
@@ -283,7 +271,6 @@ export default {
       return {
           formm:{
                 nama: '',
-                umur: '',
                 tempatLahir: '',
                 tanggalLahir:'',
                 alamat:'',

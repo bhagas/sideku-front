@@ -1,27 +1,27 @@
 <template>
     <div id="ScreeningPasien">
-        <myheader></myheader>
+  
         <b-container>
             <b-row>
                 <b-col md="12" style="margin-top:60px;margin-bottom:60px">
                     <div class="box">
                         <b-row>
                             <b-col md="12">
-                                <h3 class="text-center m-t-0 m-b-0"><strong>SCREENING PASIEN</strong></h3>
+                                <h3 class="text-center m-t-0 m-b-0"><strong>SCREENING EMOSI</strong></h3>
                             </b-col>
                         </b-row>
- 
+
                         <b-row class="m-t-15">
                             <b-col md="12">
                                 <b-breadcrumb>
-                                    <b-breadcrumb-item href="/dashboard">
-                                    <b-icon icon="house-fill" scale="1.25" shift-v="1.25" aria-hidden="true"></b-icon>
-                                    Dashboard
-                                    </b-breadcrumb-item>
-                                    
-                                    <b-breadcrumb-item><router-link :to="'/screening'">Data Pasien</router-link></b-breadcrumb-item>
-                                    
-                                    <b-breadcrumb-item active>Screening Pasien</b-breadcrumb-item>
+                                   <h5>Nama: {{pasien.nama}}</h5> 
+                               
+                                </b-breadcrumb>
+                            </b-col>
+                             <b-col md="12">
+                                <b-breadcrumb>
+                                   <h5>Alamat: {{pasien.alamat}}</h5> 
+                               
                                 </b-breadcrumb>
                             </b-col>
                         </b-row>
@@ -56,7 +56,8 @@
                                     </b-card-header>
                                     <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
                                         <b-card-body>
-                                            <h6><i>Pastikan gambar wajah anda tegak lurus</i></h6>
+                                      
+                                                <h6><i>Pastikan gambar wajah anda tegak lurus</i></h6>
        
                                                  <input placeholder="ambil gambar wajah" id="file" ref="file" type="file" accept="image/*"  capture v-on:change="handleFileUpload" >
                                                 <b-alert show variant="success" style="margin-top:15px">
@@ -189,15 +190,11 @@
     </div>
 </template>
 <script>
-import myheader from "../../components/header"
 
 import axios from "axios"
 export default {
     name:"ScreeningPasien",
-    components:{
-        myheader,
-     
-    },
+  
 
     data(){
         
@@ -229,21 +226,13 @@ export default {
         }
     },
     mounted() {
-           axios.get('http://sideku.org:8801/pasien/'+this.$route.params.idPasien,{
-           headers: {
-                  'accesstoken': localStorage.getItem('token')
-              }
-        }).then(data=>{
+           axios.get('http://sideku.org:8801/pasien/front/'+this.$route.params.idPasien).then(data=>{
             //    console.log(data.data.respon[0])
                this.pasien = data.data.respon[0]
              
         })
         //load master
-        axios.get('http://sideku.org:8801/penyakit/history/'+this.$route.params.idPasien,{
-           headers: {
-                  'accesstoken': localStorage.getItem('token')
-              }
-        }).then(data=>{
+        axios.get('http://sideku.org:8801/penyakit/historyfront/'+this.$route.params.idPasien).then(data=>{
                 
                this.penyakit = [];
                 data.data.respon.forEach((element) => {
@@ -262,11 +251,7 @@ export default {
              
              
         })
-         axios.get('http://sideku.org:8801/gejalafisik/history/'+this.$route.params.idPasien,{
-           headers: {
-                  'accesstoken': localStorage.getItem('token')
-              }
-        }).then(data=>{
+         axios.get('http://sideku.org:8801/gejalafisik/historyfront/'+this.$route.params.idPasien).then(data=>{
             this.gejalaFisik = []
                data.data.respon.forEach((element) => {
                     let ob = {
@@ -285,11 +270,7 @@ export default {
              
         })
 
-          axios.get('http://sideku.org:8801/gejalapsikis/history/'+this.$route.params.idPasien,{
-           headers: {
-                  'accesstoken': localStorage.getItem('token')
-              }
-        }).then(data=>{
+          axios.get('http://sideku.org:8801/gejalapsikis/historyfront/'+this.$route.params.idPasien).then(data=>{
                   this.gejalaPsikis = []
                data.data.respon.forEach((element) => {
                     let ob = {
@@ -307,11 +288,7 @@ export default {
            
              
         })
-        axios.get('http://sideku.org:8801/gejalaperilakuburuk/history/'+this.$route.params.idPasien,{
-           headers: {
-                  'accesstoken': localStorage.getItem('token')
-              }
-        }).then(data=>{
+        axios.get('http://sideku.org:8801/gejalaperilakuburuk/historyfront/'+this.$route.params.idPasien).then(data=>{
                    this.gejapaPerilakuBuruk = []
                data.data.respon.forEach((element) => {
                     let ob = {
@@ -329,11 +306,7 @@ export default {
           
              
         })
-         axios.get('http://sideku.org:8801/pernyataan/history/'+this.$route.params.idPasien,{
-           headers: {
-                  'accesstoken': localStorage.getItem('token')
-              }
-        }).then(data=>{
+         axios.get('http://sideku.org:8801/pernyataan/historyfront/'+this.$route.params.idPasien).then(data=>{
                console.log(data.data.respon)
                  this.pernyataan = []
                data.data.respon.forEach((element) => {
@@ -366,7 +339,14 @@ export default {
         })
     },
     methods:{
-       
+         handleFileUpload(e){
+            //  console.log(e)
+             this.file = this.$refs.file.files[0];
+            //  console.log(this.file)
+              let fileEvent = e.target.files[0];
+              this.urlPreview = URL.createObjectURL(fileEvent);
+              this.submitFiles()
+      },
       loading(){
            let vm = this;
             vm.$swal({
@@ -401,19 +381,10 @@ export default {
                 vm.$swal.close()
                 });
             },
-                handleFileUpload(e){
-            //  console.log(e)
-            
-             this.file = this.$refs.file.files[0];
-              console.log(this.$refs.file.files)
-              let fileEvent = e.target.files[0];
-              this.urlPreview = URL.createObjectURL(fileEvent);
-              this.submitFiles()
-      },
                submitData(){
                  let vm = this;
                      this.loading();
-                 axios.post( 'http://sideku.org:8801/pasien/screening', 
+                 axios.post( 'http://sideku.org:8801/pasien/screeningfront', 
                         {
                             pasienId: this.$route.params.idPasien,
                             namaFile: vm.urlHasil,
@@ -423,16 +394,11 @@ export default {
                             poolGejalaPsikis: vm.gejalaPsikis,
                             poolGejalaPerilakuBuruk: vm.gejapaPerilakuBuruk,
                             poolPernyataan: vm.pernyataan
-                        },
-                        {
-                            headers: {
-                                'accesstoken': localStorage.getItem('token')
-                            }
                         }
                         ).then(function(ress){
                         console.log(ress);
                           vm.$swal.close()
-                      vm.$swal('Berhasil', ':)', 'success');
+                      vm.$swal('Berhasil', 'Terima Kasih sudah berpartisipasi, data anda akan kami simpan. silahkan tutup halaman ini', 'success');
                         })
                         .catch(function(errr){
                               vm.$swal('Gagal', errr, 'error');

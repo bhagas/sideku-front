@@ -187,7 +187,8 @@
                 </b-form-group>
 
                 <b-form-group label="Tanggal Lahir">
-                    <b-form-datepicker id="example-datepicker"  v-model="formm.tanggalLahir" required></b-form-datepicker>
+                    <!-- <b-form-datepicker id="example-datepicker"  v-model="formm.tanggalLahir" required></b-form-datepicker> -->
+                    <date-picker v-model="formm.tanggalLahir" valueType="format" style="width:100%" required></date-picker>
                 </b-form-group>
 
                 <b-form-group label="Alamat">
@@ -231,7 +232,8 @@
                 </b-form-group>
 
                 <b-form-group label="Tanggal Lahir">
-                    <b-form-datepicker id="example-datepicker"  v-model="formm.tanggalLahir" required></b-form-datepicker>
+                    <!-- <b-form-datepicker id="example-datepicker"  v-model="formm.tanggalLahir" required></b-form-datepicker> -->
+                    <date-picker v-model="formm.tanggalLahir" valueType="format" style="width:100%" required></date-picker>
                 </b-form-group>
 
                 <b-form-group label="Alamat">
@@ -262,10 +264,13 @@
 import myheader from "../../components/header"
 
 import axios from 'axios';
+import DatePicker from 'vue2-datepicker';
+import 'vue2-datepicker/index.css';
 export default {
     name:"Pernyataan",
     components:{
-        myheader
+        myheader,
+        DatePicker
     },
     data() {
       return {

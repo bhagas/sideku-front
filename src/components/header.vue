@@ -5,10 +5,11 @@
                 <b-row>
                     <b-col cols="6" md="8" lg="8">
                         <div class="partone">
-                            <img src="https://via.placeholder.com/50">
+                            <h3 class="m-t-0 m-b-0"><strong>SIDE</strong></h3>
+                            <!-- <img src="https://via.placeholder.com/50">
                             <div class="brandname">
                                 <h3 class="m-t-0 m-b-0 m-l-10"><strong>SIDE</strong></h3>
-                            </div>
+                            </div> -->
                         </div>
                     </b-col>
 
@@ -26,10 +27,10 @@
                                         
                                     </div>
                                 </template>
-                                <b-dropdown-text >
+                                <!-- <b-dropdown-text >
                                     <h6 style="font-weight:bold;text-align:left" class="m-t-0 m-b-0">Hi, Username</h6>
                                 </b-dropdown-text>
-                                <b-dropdown-divider></b-dropdown-divider>
+                                <b-dropdown-divider></b-dropdown-divider> -->
                                 
                                 <b-dropdown-item v-on:click="logoutdong()">Logout</b-dropdown-item>
                             </b-dropdown>

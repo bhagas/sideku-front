@@ -5,10 +5,11 @@
         <b-col md="4" offset-md="4">
           <div style="display:flex;height:100vh;background-color:;align-items:center">
             <div style="width:100%;height:;background-color:;padding:30px;background-color:rgba(0,0,0,0.7);border-radius:6px;color:#fff">
-              <h2 class="text-center">LOGIN SIDEKU</h2>
+              <h2 class="text-center">LOGIN SIDE</h2>
               <hr/>
               <b-form>
-                 <div v-if="pesan">{{pesan}}</div>
+                
+                 <div v-if="pesan"><b-alert show variant="danger">{{pesan}}</b-alert></div>
                 <b-form-group 
                 label="Username" 
                 >
@@ -125,5 +126,10 @@ export default {
 </script>
 
 <style scoped>
-
+#login{
+  background-image: url('../assets/bg.jpg');
+  background-size: 100%;
+  background-repeat: repeat;
+  /* background-position: 100% ; */
+}
 </style>

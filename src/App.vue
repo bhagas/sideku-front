@@ -7,12 +7,18 @@
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
-
+body{
+	background-image: url('assets/bg.jpg');
+  background-size:100%;
+  /* background-repeat: repeat; */
+  /* background-size: cover; */
+}
 #app {
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  
 }
 
 /* Margin top */

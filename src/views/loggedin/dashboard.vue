@@ -235,7 +235,7 @@
          </b-col> -->
        </b-row>
      </b-container>
-     <myfooter></myfooter>
+     <!-- <myfooter></myfooter> -->
   </div>
 </template>
 
@@ -243,7 +243,7 @@
 // @ is an alias to /src
 import { mapState, mapGetters, mapActions } from 'vuex'
 import myheader from "../../components/header"
-import myfooter from "../../components/footer"
+// import myfooter from "../../components/footer"
 export default {
   name: "dashboard",
   data (){
@@ -253,7 +253,7 @@ export default {
   },
   components:{
     myheader,
-    myfooter
+    // myfooter
   },
 
 

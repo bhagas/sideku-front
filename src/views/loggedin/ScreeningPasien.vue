@@ -60,9 +60,10 @@
        
                                                  <input placeholder="ambil gambar wajah" id="file" ref="file" type="file" accept="image/*"  capture v-on:change="handleFileUpload" >
                                                 <b-alert show variant="success" style="margin-top:15px">
-                                                    <h4 class="alert-heading">{{emosi}}</h4>
-                                                   <img v-if="urlPreview" :src="urlPreview" style="max-width: 300px;" />
-                                                   <img v-if="urlHasil" :src="'http://sideku.org:8841/hasilprediksi/'+urlHasil" style="max-width: 300px;" />
+                                                    <h4 class="alert-heading" style="text-transform:uppercase;text-align:center"><strong>{{emosi}}</strong></h4>
+                                                    <hr/>
+                                                   <img v-if="urlPreview" :src="urlPreview" style="width:100%" />
+                                                   <img v-if="urlHasil" :src="'http://sideku.org:8841/hasilprediksi/'+urlHasil" style="width:100%" />
                                                 </b-alert>
                                       
                                         </b-card-body>
@@ -170,14 +171,16 @@
 
                                                 
                                             </b-form>
+
+                                            <b-alert show variant="success" style="margin-top:15px;margin-bottom:0;">
+                                                    <h4 class="alert-heading">Skor Kuisioner Regulasi Emosi : {{nilaiPernyataan}}</h4>
+                                                
+                                                </b-alert>
                                         </b-card-body>
                                     </b-collapse>
                                     </b-card>
                                 </div>
-                                   <b-alert show variant="success" style="margin-top:15px">
-                                                    <h4 class="alert-heading">Skor: {{nilaiPernyataan}}</h4>
-                                                
-                                                </b-alert>
+                                   
                                   
                                  <b-button variant="primary" class="m-t-15" v-on:click="submitData">Simpan </b-button>
                             </b-col>

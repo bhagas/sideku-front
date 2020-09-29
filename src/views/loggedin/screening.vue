@@ -28,7 +28,7 @@
 
                         <b-row>
                            <b-col md="12">
-                                <b-button v-b-modal.modal-1 variant="primary">Tambah Data</b-button>
+                                <b-button v-b-modal.modal-1 variant="primary">Tambah Data </b-button>
                            </b-col>
                         </b-row>
 
@@ -108,9 +108,9 @@
                                     class="m-t-15"
                                     responsive
                                     >
-                                    <!-- <template v-slot:cell(name)="row">
-                                        {{ row.value.first }} {{ row.value.last }}
-                                    </template> -->
+                                    <template v-slot:cell(tanggalLahir)="row">
+                                        {{  moment().diff(row.item.tanggalLahir, 'years') }} 
+                                    </template>
 
                                     <template v-slot:cell(actions)="row">
 
@@ -262,7 +262,7 @@
 <script>
 
 import myheader from "../../components/header"
-
+import moment from 'moment'
 import axios from 'axios';
 import DatePicker from 'vue2-datepicker';
 import 'vue2-datepicker/index.css';
@@ -274,6 +274,7 @@ export default {
     },
     data() {
       return {
+          moment: moment,
           formm:{
                 nama: '',
                 tempatLahir: '',
@@ -291,7 +292,7 @@ export default {
             { key: 'nama', label: 'Nama', sortable: true, sortDirection: 'desc' },
             { key: 'alamat', label: 'Alamat', sortable: true, sortDirection: 'desc' },
             { key: 'tempatLahir', label: 'Tempat Lahir', sortable: true, sortDirection: 'desc' },
-            { key: 'tanggalLahir', label: 'Tanggal Lahir', sortable: true, sortDirection: 'desc' },
+            { key: 'tanggalLahir', label: 'Umur', sortable: true, sortDirection: 'desc' },
           // { key: 'age', label: 'Person age', sortable: true, class: 'text-center' },
           // {
           //   key: 'isActive',

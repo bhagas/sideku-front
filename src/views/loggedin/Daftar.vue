@@ -7,7 +7,7 @@
             <div class="box">
               <b-row>
                 <b-col md="12">
-                  <h3 class="text-center m-t-0 m-b-0"><strong>DAFTAR</strong></h3>
+                  <h3 class="text-center m-t-0 m-b-0"><strong>IDENTITAS DIRI</strong></h3>
                 </b-col>
               </b-row>
 

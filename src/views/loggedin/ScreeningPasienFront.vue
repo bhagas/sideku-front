@@ -7,23 +7,41 @@
                     <div class="box">
                         <b-row>
                             <b-col md="12">
-                                <h3 class="text-center m-t-0 m-b-0"><strong>SCREENING EMOSI</strong></h3>
+                                <h3 class="text-center m-t-0 m-b-0"><strong>DETEKSI EMOSI</strong></h3>
                             </b-col>
                         </b-row>
 
                         <b-row class="m-t-15">
                             <b-col md="12">
-                                <b-breadcrumb>
-                                   <h5>Nama: {{pasien.nama}}</h5> 
-                               
-                                </b-breadcrumb>
+                                <b-alert show variant="primary" style="margin-top:15px">
+                                    <div style="width:100%;display:table">
+                                        <div style="display:table-row">
+                                            <div style="display:table-cell;width:30%">
+                                                <h5>Nama</h5> 
+                                            </div>
+                                            <div style="display:table-cell;width:5%">
+                                                <h5>:</h5> 
+                                            </div>
+                                            <div style="display:table-cell">
+                                                <h5>{{pasien.nama}}</h5> 
+                                            </div>
+                                        </div>
+
+                                        <div style="display:table-row">
+                                            <div style="display:table-cell;width:30%">
+                                                <h5>Alamat</h5> 
+                                            </div>
+                                            <div style="display:table-cell;width:5%">
+                                                <h5>:</h5> 
+                                            </div>
+                                            <div style="display:table-cell">
+                                                <h5>{{pasien.alamat}}</h5> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </b-alert>
                             </b-col>
-                             <b-col md="12">
-                                <b-breadcrumb>
-                                   <h5>Alamat: {{pasien.alamat}}</h5> 
-                               
-                                </b-breadcrumb>
-                            </b-col>
+                            
                         </b-row>
 
                         <b-row>
@@ -60,10 +78,11 @@
                                                 <h6><i>Pastikan gambar wajah anda tegak lurus</i></h6>
        
                                                  <input placeholder="ambil gambar wajah" id="file" ref="file" type="file" accept="image/*"  capture v-on:change="handleFileUpload" >
-                                                <b-alert show variant="success" style="margin-top:15px">
-                                                    <h4 class="alert-heading">{{emosi}}</h4>
-                                                   <img v-if="urlPreview" :src="urlPreview" style="max-width: 300px;" />
-                                                   <img v-if="urlHasil" :src="'http://sideku.org:8841/hasilprediksi/'+urlHasil" style="max-width: 300px;" />
+                                                <b-alert show variant="primary" style="margin-top:15px">
+                                                    <h4 class="alert-heading" style="text-transform:uppercase;text-align:center"><strong>{{emosi}}</strong></h4>
+                                                    <hr/>
+                                                   <img v-if="urlPreview" :src="urlPreview" style="width:100%" />
+                                                   <img v-if="urlHasil" :src="'http://sideku.org:8841/hasilprediksi/'+urlHasil" style="width:100%" />
                                                 </b-alert>
                                       
                                         </b-card-body>
@@ -156,29 +175,38 @@
                                     </b-card-header>
                                     <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel">
                                         <b-card-body>
-                                            <b-form class="bv-example-row">
-                                                <b-form-group :label="item.isiPernyataan" v-for="(item) in pernyataan" :key="item.id">
-                                                   
-                                                    <b-form-select v-model="item.status">
-                                          
-                                                    <b-form-select-option value="1">Tidak Pernah</b-form-select-option>
-                                                        <b-form-select-option value="2">Jarang</b-form-select-option>
-                                                        <b-form-select-option value="3">Sering</b-form-select-option>
-                                                        <b-form-select-option value="4">Selalu</b-form-select-option>
+                                            <b-row>
+                                                <b-col md="12">
+                                                    <b-form class="bv-example-row">
+                                                        <b-form-group :label="item.isiPernyataan" v-for="(item) in pernyataan" :key="item.id">
                                                         
-                                                    </b-form-select>
-                                                </b-form-group>
-
+                                                            <b-form-select v-model="item.status">
                                                 
-                                            </b-form>
+                                                            <b-form-select-option value="1">Tidak Pernah</b-form-select-option>
+                                                                <b-form-select-option value="2">Jarang</b-form-select-option>
+                                                                <b-form-select-option value="3">Sering</b-form-select-option>
+                                                                <b-form-select-option value="4">Selalu</b-form-select-option>
+                                                                
+                                                            </b-form-select>
+                                                        </b-form-group>
+
+                                                        
+                                                    </b-form>
+                                                </b-col>
+
+                                                <b-col md="12">
+                                                    <b-alert show variant="primary" style="margin-top:15px">
+                                                    <h4 class="alert-heading">Skor Kuisioner Regulasi Emosi : {{nilaiPernyataan}}</h4>
+                                                
+                                                     </b-alert>
+                                                </b-col>
+                                            </b-row>
+                                            
                                         </b-card-body>
                                     </b-collapse>
                                     </b-card>
                                 </div>
-                                   <b-alert show variant="success" style="margin-top:15px">
-                                                    <h4 class="alert-heading">Skor: {{nilaiPernyataan}}</h4>
-                                                
-                                                </b-alert>
+                                   
                                   
                                  <b-button variant="primary" class="m-t-15" v-on:click="submitData">Simpan </b-button>
                             </b-col>

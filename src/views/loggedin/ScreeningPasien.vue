@@ -59,7 +59,7 @@
                                             <h6><i>Pastikan gambar wajah anda tegak lurus</i></h6>
        
                                                  <input placeholder="ambil gambar wajah" id="file" ref="file" type="file" accept="image/*"  capture v-on:change="handleFileUpload" >
-                                                <b-alert show variant="success" style="margin-top:15px">
+                                                <b-alert show variant="primary" style="margin-top:15px">
                                                     <h4 class="alert-heading" style="text-transform:uppercase;text-align:center"><strong>{{emosi}}</strong></h4>
                                                     <hr/>
                                                    <img v-if="urlPreview" :src="urlPreview" style="width:100%" />
@@ -172,7 +172,7 @@
                                                 
                                             </b-form>
 
-                                            <b-alert show variant="success" style="margin-top:15px;margin-bottom:0;">
+                                            <b-alert show variant="primary" style="margin-top:15px;margin-bottom:0;">
                                                     <h4 class="alert-heading">Skor Kuisioner Regulasi Emosi : {{nilaiPernyataan}}</h4>
                                                 
                                                 </b-alert>

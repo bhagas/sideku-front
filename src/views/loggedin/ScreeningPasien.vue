@@ -381,6 +381,7 @@ export default {
             }
         })
       },
+      
       submitFiles(){
           let vm = this;
           let formData = new FormData();
@@ -395,9 +396,15 @@ export default {
                 }
                 ).then(function(ress){
                 // console.log(ress);
-                vm.emosi = ress.data.emosi[0]
-                vm.urlHasil = ress.data.nama_file
+                if(ress.data.nama_file!=''){
+                     vm.emosi = ress.data.emosi[0];
+                vm.urlHasil = ress.data.nama_file;
+                vm.urlPreview = false;
                  vm.$swal.close()
+                }else{
+                   vm.$swal('Gagal', 'Tidak ditemukan wajah, coba kembali untuk selfie atau coba dengan mode landscape', 'error');
+                }
+               
                 })
                 .catch(function(errr){
                 console.log(errr);

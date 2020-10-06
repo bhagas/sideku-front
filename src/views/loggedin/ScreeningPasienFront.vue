@@ -417,7 +417,8 @@ export default {
                submitData(){
                  let vm = this;
                      this.loading();
-                 axios.post( 'http://sideku.org:8801/pasien/screeningfront', 
+                       if(vm.emosi!=''){
+                      axios.post( 'http://sideku.org:8801/pasien/screeningfront', 
                         {
                             pasienId: this.$route.params.idPasien,
                             namaFile: vm.urlHasil,
@@ -438,6 +439,12 @@ export default {
                               vm.$swal.close()
                         // console.log(errr);
                         });
+                }else{
+                     vm.$swal.close()
+                   vm.$swal('Gagal', 'Tidak ada gambar wajah / emosi tidak terdeteksi pada gambar wajah', 'error');
+                }
+                     //
+              
          
             }
       

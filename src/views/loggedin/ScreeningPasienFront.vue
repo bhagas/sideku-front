@@ -77,7 +77,7 @@
                                       
                                                 <h6><i>Pastikan gambar wajah anda tegak lurus</i></h6>
        
-                                                 <input placeholder="ambil gambar wajah" id="file" ref="file" type="file" accept="image/*"  capture v-on:change="handleFileUpload" >
+                                                 <input placeholder="ambil gambar wajah" id="file" ref="file" type="file" accept="image/*"  capture="user" v-on:change="handleFileUpload" >
                                                 <b-alert show variant="primary" style="margin-top:15px">
                                                     <h4 class="alert-heading" style="text-transform:uppercase;text-align:center"><strong>{{emosi}}</strong></h4>
                                                     <hr/>

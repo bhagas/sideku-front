@@ -11,7 +11,20 @@
               </b-col>
 
               <b-col md="12" lg="12" class="m-t-30">
-                <p style="text-align:justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus ad omnis suscipit deserunt cum nemo voluptate repellendus quis, accusamus laboriosam nesciunt blanditiis distinctio, aut quaerat non atque, minima reiciendis. Minus, eligendi quis alias ut obcaecati asperiores dicta ullam veritatis blanditiis doloribus modi et sint dignissimos quo ipsam, iusto earum exercitationem!</p>
+                <p style="text-align:justify">
+                  Pandemi COVID-19 menimbulkan emosi yang dapat menurunkan imun seseorang dan akan menyebabkan risiko tertular COVID-19 meningkat. Emosi merupakan aspek kesehatan mental yang sangat berpengaruh terhadap kesehatan fisik. Pelayanan kesehatan saat ini masih fokus pada pendekatan kuratif dengan belum memperhatikan faktor stress, emosi, sosial maupun spiritual yang sangat berpengaruh terhadap kesehatan secara holistik
+                </p>
+                <p style="text-align:justify">
+                  Beberapa penelitian tentang intervensi emosi melalui pendekatan spiritual di Indonesia telah membuktikan adanya kepatuhan dalam berobat dan meningkatkan kemandirian. Kemandirian terdiri dari kemandirian fisik, mental, sosial, cultural dan spiritual membuat seseorang mampu mencegah penyakit secara holistic. 
+                </p>
+
+                <p style="text-align:justify">
+                  Penelitian ini bertujuan untuk mendeteksi emosi dan pengaruhnya terhadap tanda-tanda vital dari kemampuan meningkatkan imun dalam tubuh. Penelitian ini menggunakan sebuah sistem informasi yang bernama SIDE (Sistem Informasi Dekteksi Emosi) untuk mendeteksi emosi masyrakat usia produktif.
+                </p>
+
+                <p style="text-align:justify">
+                  Untuk mulai mendeteksi emosi, silahkan klik button dibawah ini kemudian isi data dengan sebener-benarnya sehingga emosi anda dapat kami analisa lebih lanjut.
+                </p>
               </b-col>
             </b-row>
             

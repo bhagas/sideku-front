@@ -55,23 +55,7 @@ export default {
    return{
      isLogin: false,
    };
- },
-
-watch:{
-
-},
-
-created: {
-    
-  
-},
-computed: {
-
-},
-
-methods:{
- 
-}
+ }
 
 };
 </script>

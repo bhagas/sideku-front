@@ -6,6 +6,8 @@
     </div>
 </template>
 <script>
+
+
 export default {
     name: "Camera",
     data(){
@@ -34,3 +36,6 @@ export default {
 
 }
 </script>
+<style>
+
+</style>

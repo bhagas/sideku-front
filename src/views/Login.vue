@@ -88,9 +88,9 @@ export default {
 
  
 
-  mounted:function(){
-      console.log(this.$route.query.tujuan)
-  },
+  // mounted:function(){
+  //     console.log(this.$route.query.tujuan)
+  // },
 
   computed: {
   ...mapState('Login', ['token', 'pesan', 'proses']),

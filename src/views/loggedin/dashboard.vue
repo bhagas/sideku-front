@@ -5,7 +5,7 @@
      <b-container class="bv-example-row">
        <b-row class="m-t-30">
          <b-col>
-           <h3 class="text-center m-t-0 m-b-0"><strong>DASHBOARD SIDE</strong></h3>
+           <h3 class="text-center m-t-0 m-b-0"><strong>DASHBOARD SIDE </strong></h3>
            <!-- <hr/> -->
          </b-col>
        </b-row>
@@ -257,13 +257,17 @@
      </b-container>
      <!-- <myfooter></myfooter> -->
      <b-modal id="modal-1" hide-footer centered title="EXPORT EXCEL">
+       jumlah total : {{jmlTotal}}
+       <br>
+       Harap membatasi jumlah laporan yang akan anda download maksimal 200 sekali download
             <b-form class="bv-example-row">
               <b-row>
                 <b-col md="6" lg="6">
                   <b-form-group 
                   label="Dari" 
                   >
-                    <b-form-spinbutton id="sb-default" v-model="value"></b-form-spinbutton>
+                    <!-- <b-form-spinbutton id="sb-default" v-model="value"></b-form-spinbutton> -->
+                    <b-form-input type="number" placeholder="" v-model="dari"></b-form-input>
                       
                   </b-form-group>
                 </b-col>
@@ -272,13 +276,13 @@
                   <b-form-group 
                   label="Sampai" 
                   >
-                    <b-form-spinbutton id="sb-default" v-model="value"></b-form-spinbutton>
-                      
+                    <!-- <b-form-spinbutton id="sb-default" v-model="value"></b-form-spinbutton> -->
+                       <b-form-input type="number" placeholder="" v-model="sampai"></b-form-input>
                   </b-form-group>
                 </b-col>
               </b-row>
                 
-                <b-button variant="primary" class="m-t-15">Export</b-button>
+                <b-button variant="primary" class="m-t-15" @click="print">Export</b-button>
             </b-form>
         </b-modal>
   </div>
@@ -288,12 +292,15 @@
 // @ is an alias to /src
 import { mapState, mapGetters, mapActions } from 'vuex'
 import myheader from "../../components/header"
+import axios from "axios"
 // import myfooter from "../../components/footer"
 export default {
   name: "dashboard",
   data (){
     return{
-  
+      dari:0,
+      sampai:0,
+      jmlTotal:0
     };
   },
   components:{
@@ -307,7 +314,13 @@ computed: {
  ...mapGetters('Login',['cekLogin']),
 
 },
-
+mounted(){
+  let vm = this;
+  axios.get('http://sideku.org:8801/pasien/count').then(ree=>{
+    vm.jmlTotal = ree.data.jml;
+    // console.log(ree)
+  })
+},
 methods:{
   ...mapActions('Login', [ 'doLogin', 'doLogout' ]),
  
@@ -317,6 +330,15 @@ methods:{
      this.$router.push({ name: "login"})
     // this.isLogin =  this.cekLogin
   },
+  print: function(){
+    // console.log(this.sampai)
+    if(parseInt(this.dari) >= parseInt(this.sampai)){
+      alert('Jumlah "dari" harus lebih kecil dari "sampai"')
+    }else{
+       window.open('http://sideku.org:8801/pasien/print?a='+this.dari+'&b='+this.sampai, '_blank');
+    }
+   
+  }
 }
 
 };

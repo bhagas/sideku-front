@@ -10,7 +10,38 @@
                                 <h3 class="text-center m-t-0 m-b-0"><strong>SCREENING PASIEN</strong></h3>
                             </b-col>
                         </b-row>
- 
+      <b-row class="m-t-15">
+                            <b-col md="12">
+                                <b-alert show variant="primary" style="margin-top:15px">
+                                    <div style="width:100%;display:table">
+                                        <div style="display:table-row">
+                                            <div style="display:table-cell;width:30%">
+                                                <h5>Nama</h5> 
+                                            </div>
+                                            <div style="display:table-cell;width:5%">
+                                                <h5>:</h5> 
+                                            </div>
+                                            <div style="display:table-cell">
+                                                <h5>{{pasien.nama}}</h5> 
+                                            </div>
+                                        </div>
+
+                                        <div style="display:table-row">
+                                            <div style="display:table-cell;width:30%">
+                                                <h5>Alamat</h5> 
+                                            </div>
+                                            <div style="display:table-cell;width:5%">
+                                                <h5>:</h5> 
+                                            </div>
+                                            <div style="display:table-cell">
+                                                <h5>{{pasien.alamat}}</h5> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </b-alert>
+                            </b-col>
+                            
+                        </b-row>
                         <b-row class="m-t-15">
                             <b-col md="12">
                                 <b-breadcrumb>

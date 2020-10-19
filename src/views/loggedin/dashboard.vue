@@ -95,11 +95,21 @@
            </center>
         </b-col>
 
-         
+        <b-col cols="10" offset="1" class="m-t-30">
+          <center>
+            <div style="width:100%;padding:30px;box-shadow:0 7px 20px 0 rgba(0,0,0,.3);border-radius:8px;background-color: #fff;" v-b-modal.modal-1>
+                <center>
+                  <img src="../../assets/excel.png" style="height:100px">
+                  <h5 class="m-t-15 m-b-0"><strong>EXPORT</strong></h5>
+                  <h6 class="m-t-0 m-b-0"><strong>EXCEL</strong></h6>
+                </center>
+            </div>
+          </center>
+        </b-col>
       </b-row>
        <b-row class="m-b-30 d-none d-sm-block">
          
-         <b-col md="8" lg="8" offset-md="2" offset-lg="2">
+         <b-col md="10" lg="10" offset-md="1" offset-lg="1">
            <div class="partone">
              <div class="boxmenu">
                <router-link :to="'screening'" style="text-decoration:none;color:#333">
@@ -155,6 +165,16 @@
                  <h6 class="m-t-0 m-b-0"><strong>PERNYATAAN</strong></h6>
                </center>
                 </router-link>
+             </div>
+
+             <div class="boxmenu" v-b-modal.modal-1>
+               <!-- <span > -->
+               <center>
+                 <img src="../../assets/excel.png" style="height:100px">
+                 <h5 class="m-t-15 m-b-0"><strong>EXPORT</strong></h5>
+                 <h6 class="m-t-0 m-b-0"><strong>EXCEL</strong></h6>
+               </center>
+                <!-- </span> -->
              </div>
              
            </div>
@@ -236,6 +256,31 @@
        </b-row>
      </b-container>
      <!-- <myfooter></myfooter> -->
+     <b-modal id="modal-1" hide-footer centered title="EXPORT EXCEL">
+            <b-form class="bv-example-row">
+              <b-row>
+                <b-col md="6" lg="6">
+                  <b-form-group 
+                  label="Dari" 
+                  >
+                    <b-form-spinbutton id="sb-default" v-model="value"></b-form-spinbutton>
+                      
+                  </b-form-group>
+                </b-col>
+
+                <b-col md="6" lg="6">
+                  <b-form-group 
+                  label="Sampai" 
+                  >
+                    <b-form-spinbutton id="sb-default" v-model="value"></b-form-spinbutton>
+                      
+                  </b-form-group>
+                </b-col>
+              </b-row>
+                
+                <b-button variant="primary" class="m-t-15">Export</b-button>
+            </b-form>
+        </b-modal>
   </div>
 </template>
 
@@ -280,7 +325,7 @@ methods:{
 <style scoped>
 #dashboard .partone{
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap;
 }

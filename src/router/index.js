@@ -1,17 +1,22 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import Perumahan from "../views/Perumahan.vue";
+import DataPerumahan from "../views/DataPerumahan.vue";
+import DetailPerumahan from "../views/DetailPerumahan.vue";
+import Pengembang from "../views/Pengembang.vue";
+import DaftarPengembang from "../views/DaftarPengembang.vue";
+import DashboardPengembang from "../views/DashboardPengembang.vue";
+import EditProfilPengembang from "../views/EditProfilPengembang.vue";
+import PerumahanPengembang from "../views/PerumahanPengembang.vue";
+import InputPerumahanPengembang from "../views/InputPerumahanPengembang.vue";
+import EditPerumahanPengembang from "../views/EditPerumahanPengembang.vue";
+import TipePerumahanPengembang from "../views/TipePerumahanPengembang.vue";
+import Csr from "../views/csr.vue";
+import DetailCsr from "../views/DetailCsr.vue";
+import DashboardPerbankan from "../views/DashboardPerbankan.vue";
 import Login from "../views/Login.vue";
-import RiwayatPenyakit from "../views/loggedin/RiwayatPenyakit.vue";
-import GejalaFisik from "../views/loggedin/GejalaFisik.vue";
-import GejalaPsikis from "../views/loggedin/GejalaPsikis.vue";
-import GejalaPerilakuBuruk from "../views/loggedin/GejalaPerilakuBuruk.vue";
-import MasterPernyataan from "../views/loggedin/MasterPernyataan";
-import screening from "../views/loggedin/screening";
-import ScreeningPasien from "../views/loggedin/ScreeningPasien";
-import dashboard from "../views/loggedin/dashboard.vue";
-import Daftar from "../views/loggedin/Daftar.vue";
-import ScreeningPasienFront from "../views/loggedin/ScreeningPasienFront";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -23,111 +28,145 @@ const routes = [
       guest: true
     }
   },
+
+  {
+    path: "/perumahan",
+    name: "Perumahan",
+    component: Perumahan,
+    meta: {
+      guest: true
+    }
+  },
+
+  {
+    path: "/data_perumahan",
+    name: "DataPerumahan",
+    component: DataPerumahan,
+    meta: {
+      guest: true
+    }
+  },
+
+  {
+    path: "/detail_perumahan",
+    name: "DetailPerumahan",
+    component: DetailPerumahan,
+    meta: {
+      guest: true
+    }
+  },
+
+  {
+    path: "/pengembang",
+    name: "Pengembang",
+    component: Pengembang,
+    meta: {
+      guest: true
+    }
+  },
+
+  {
+    path: "/daftar_pengembang",
+    name: "DaftarPengembang",
+    component: DaftarPengembang,
+    meta: {
+      guest: true
+    }
+  },
+  
+  {
+    path: "/dashboard_pengembang",
+    name: "DashboardPengembang",
+    component: DashboardPengembang,
+    meta: {
+      guest: true
+    }
+  },
+
+  {
+    path: "/edit_profil_pengembang",
+    name: "EditProfilPengembang",
+    component: EditProfilPengembang,
+    meta: {
+      guest: true
+    }
+  },
+
+  {
+    path: "/perumahan_pengembang",
+    name: "PerumahanPengembang",
+    component: PerumahanPengembang,
+    meta: {
+      guest: true
+    }
+  },
+
+  {
+    path: "/input_perumahan_pengembang",
+    name: "InputPerumahanPengembang",
+    component: InputPerumahanPengembang,
+    meta: {
+      guest: true
+    }
+  },
+
+  {
+    path: "/edit_perumahan_pengembang",
+    name: "EditPerumahanPengembang",
+    component: EditPerumahanPengembang,
+    meta: {
+      guest: true
+    }
+  },
+
+  {
+    path: "/tipe_perumahan_pengembang",
+    name: "TipePerumahanPengembang",
+    component: TipePerumahanPengembang,
+    meta: {
+      guest: true
+    }
+  },
+
+
+  {
+    path: "/csr",
+    name: "Csr",
+    component: Csr,
+    meta: {
+      guest: true
+    }
+  },
+
+  {
+    path: "/detail_csr",
+    name: "DetailCsr",
+    component: DetailCsr,
+    meta: {
+      guest: true
+    }
+  },
+
+  {
+    path: "/dashboard_perbankan",
+    name: "DashboardPerbankan",
+    component: DashboardPerbankan,
+    meta: {
+      guest: true
+    }
+  },
+
+
   {
     path: "/login",
-    name: "login",
+    name: "Login",
     component: Login,
     meta: {
       guest: true
     }
   },
-  {
-    path: "/daftar",
-    name: "daftar",
-    component: Daftar,
   
-  },
-  {
-    path: "/screeningfront/:idPasien",
-    name: "ScreeningPasienFront",
-    component: ScreeningPasienFront,
-  
-  },
-  {
-    path: '/dashboard',
-    name: 'dashboard',
-    component: dashboard,
-    meta: {
-        requiresAuth: true
-    }
-  },
 
-  {
-    path: '/riwayatpenyakit',
-    name: 'riwayatpenyakit',
-    component: RiwayatPenyakit,
-    meta: {
-        requiresAuth: true
-    }
-  },
-  {
-    path: '/gejalafisik',
-    name: 'gejalafisik',
-    component: GejalaFisik,
-    meta: {
-        requiresAuth: true
-    }
-  },
-  {
-    path: '/gejalapsikis',
-    name: 'gejalapsikis',
-    component: GejalaPsikis,
-    meta: {
-        requiresAuth: true
-    }
-  },
-  {
-    path: '/gejalaPerilakuBuruk',
-    name: 'gejalaPerilakuBuruk',
-    component: GejalaPerilakuBuruk,
-    meta: {
-        requiresAuth: true
-    }
-  },
-  {
-    path: '/masterpernyataan',
-    name: 'masterpernyataan',
-    component: MasterPernyataan,
-    meta: {
-        requiresAuth: true
-    }
-  },
-
-  {
-    path: '/screening',
-    name: 'screening',
-    component: screening,
-    meta: {
-        requiresAuth: true
-    }
-  },
-
-  {
-    path: '/screeningpasien/:idPasien',
-    name: 'ScreeningPasien',
-    component: ScreeningPasien,
-    meta: {
-        requiresAuth: true
-    }
-  },
-// {
-//     path: '/admin',
-//     name: 'admin',
-//     component: Admin,
-//     meta: {
-//         requiresAuth: true,
-//         is_admin : true
-//     }
-// },
-  {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
-  }
 ];
 
 const router = new VueRouter({

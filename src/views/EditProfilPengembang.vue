@@ -1,5 +1,5 @@
 <template>
-  <div id="login" >
+  <div id="daftar_pengembang" >
     <header>
       <b-container>
         <b-row>
@@ -24,12 +24,14 @@
 
     <section class="section-one">
         <b-container>
-            <b-row>
+            
+
+            <b-row class="m-t-30">
                 <b-col md="6" offset-md="3">
                     <div class="box">
                         <b-row>
                             <b-col md="12">
-                                <h2 class="m-t-0 m-b-0 text-center"><strong>Login Klinik PKP</strong></h2>
+                                <h2 class="m-t-0 m-b-0 text-center"><strong>Edit Profil Pengembang</strong></h2>
                             </b-col>
                         </b-row>
 
@@ -42,6 +44,21 @@
                         <b-row>
                             <b-col md="12">
                                 <b-form>
+                                    <b-form-group label="Nama">
+                                        <b-form-input></b-form-input>
+                                    </b-form-group>
+
+                                    <b-form-group label="Alamat">
+                                        <b-form-input></b-form-input>
+                                    </b-form-group>
+
+                                    <b-form-group label="Email">
+                                        <b-form-input></b-form-input>
+                                    </b-form-group>
+
+                                    <b-form-group label="Nomor Telepon">
+                                        <b-form-input></b-form-input>
+                                    </b-form-group>
 
                                     <b-form-group label="Username">
                                         <b-form-input></b-form-input>
@@ -51,7 +68,7 @@
                                         <b-form-input type="password"></b-form-input>
                                     </b-form-group>
 
-                                    <router-link :to="'/dashboard_pengembang'" style="text-decoration:none"><b-button variant="primary">Login</b-button></router-link>
+                                    <b-button type="submit" variant="primary">Daftar</b-button>
                                 </b-form>
                             </b-col>
                         </b-row>
@@ -68,7 +85,7 @@
 // import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
-  name: "Login",
+  name: "DaftarPengembang",
  data (){
    return{
      isLogin: false,
@@ -113,4 +130,11 @@ header .right h6{
 .section-one {
     padding: 60px 0;
 }
+
+/* .section-one .box{
+    width: 100%;
+    padding: 30px;
+    background-color: whitesmoke;
+    border-radius: 10px;
+} */
 </style>

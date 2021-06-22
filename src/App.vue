@@ -6,18 +6,22 @@
 </template>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
-body{
-	background-image: url('assets/bg.jpg');
-  background-size:100%;
-  /* background-repeat: repeat; */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap');
+html,body{
+	/* background-image: url('assets/bg_perumahan.png');
+  background-size:100%; */
+  /* background-repeat: no-repeat; */
   /* background-size: cover; */
+  /* background-color:#ECF0F1 !important; */
+  
 }
 #app {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  /* font-weight: 400; */
+  font-size: 14px;
   
 }
 
@@ -213,10 +217,7 @@ body{
 }
 /* End padding Right */
 
-.box{
-  background-color: #fff;
-  padding:30px;
-  box-shadow:0 7px 20px 0 rgba(0,0,0,.1);
-  border-radius:8px
+.title{
+	font-weight: 800 !important;
 }
 </style>
